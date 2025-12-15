@@ -20,6 +20,9 @@ watch(
 );
 
 onMounted(() => {
+  // 初始化天气数据
+  weatherStore.init();
+  
   // 页面加载完成后显示内容
   setTimeout(() => {
     isLoaded.value = true;

@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import {
   Application,
-  Layout,
-  DataFile,
+  LayoutOne,
+  FileCode,
   Server,
-  Database,
+  DatabaseConfig,
 } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../config/nav";
 
 // 图标映射
 const iconMap: Record<string, any> = {
   Application,
-  Layout,
-  DataFile,
+  Layout: LayoutOne,
+  DataFile: FileCode,
   Server,
-  Database,
+  Database: DatabaseConfig,
 };
 
 // 跳转链接
