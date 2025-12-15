@@ -6,6 +6,7 @@ import NavGrid from "./components/NavGrid.vue";
 import TimeWeather from "./components/TimeWeather.vue";
 import ThemeSwitch from "./components/ThemeSwitch.vue";
 import FooterInfo from "./components/FooterInfo.vue";
+import SettingMenu form "./components/SettingsMenu";
 import { useWeatherStore } from "./store/weather";
 
 const weatherStore = useWeatherStore();
@@ -49,7 +50,7 @@ onMounted(() => {
             <!-- 时间天气 + 主题切换 -->
             <div class="top-bar">
               <TimeWeather />
-              <ThemeSwitch />
+               <SettingsMenu />
             </div>
             <!-- 导航网格 -->
             <NavGrid />
@@ -110,8 +111,8 @@ onMounted(() => {
 
 .top-bar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
 }
 
 // 响应式适配
