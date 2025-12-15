@@ -80,6 +80,8 @@ const refreshWeather = () => {
 
 <style lang="scss" scoped>
 .time-weather {
+  width: 100%;
+  box-sizing: border-box;
   padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;

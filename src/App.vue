@@ -122,7 +122,10 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 }
 
 // 响应式适配
