@@ -4,7 +4,7 @@ import { Github } from "@icon-park/vue-next";
 // 个人信息配置
 const profile = {
   avatar: "https://avatars.githubusercontent.com/u/1?v=4", // 替换为你的头像
-  name: "Your Name",
+  name: "Laaaanbq",
   description: "一个简单的个人导航主页",
   github: "https://github.com/your-username",
 };
