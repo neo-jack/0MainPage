@@ -6,7 +6,7 @@ import NavGrid from "./components/NavGrid.vue";
 import TimeWeather from "./components/TimeWeather.vue";
 import ThemeSwitch from "./components/ThemeSwitch.vue";
 import FooterInfo from "./components/FooterInfo.vue";
-import SettingMenu form "./components/SettingsMenu";
+import SettingsMenu from "./components/SettingsMenu.vue";
 import { useWeatherStore } from "./store/weather";
 
 const weatherStore = useWeatherStore();
@@ -39,6 +39,9 @@ onMounted(() => {
     <!-- 主内容区 -->
     <Transition name="fade">
       <main v-if="isLoaded" class="main-content">
+        <div class="main-actions">
+          <SettingsMenu />
+        </div>
         <div class="content-wrapper">
           <!-- 左侧：个人信息卡片 -->
           <section class="left-section">
@@ -50,7 +53,6 @@ onMounted(() => {
             <!-- 时间天气 + 主题切换 -->
             <div class="top-bar">
               <TimeWeather />
-               <SettingsMenu />
             </div>
             <!-- 导航网格 -->
             <NavGrid />
@@ -83,6 +85,13 @@ onMounted(() => {
   z-index: 1;
 }
 
+.main-actions {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 5;
+}
+
 .content-wrapper {
   flex: 1;
   display: flex;
@@ -106,13 +115,14 @@ onMounted(() => {
   width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0;
 }
 
 .top-bar {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding-bottom: 1rem;
 }
 
 // 响应式适配

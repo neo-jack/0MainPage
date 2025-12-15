@@ -85,14 +85,19 @@ onUnmounted(() => {
 }
 
 .settings-btn {
-  padding: 0.4rem 0.8rem;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-light);
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
