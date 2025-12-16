@@ -56,12 +56,20 @@ onUnmounted(() => {
     </button>
 
     <div v-if="open" class="menu glass-card" @click.stop>
+      <a
+        class="menu-item link"
+        href="https://java2ai.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        网站参考链接
+      </a>
       <button
         class="menu-item danger"
         type="button"
         @click="clearCacheAndReload"
       >
-        清除缓存并刷新
+        刷新
       </button>
     </div>
   </div>
@@ -141,6 +149,11 @@ onUnmounted(() => {
 
   &.danger {
     color: rgba(255, 200, 200, 0.95);
+  }
+
+  &.link {
+    text-decoration: none;
+    display: block;
   }
 }
 </style>
