@@ -58,7 +58,11 @@ onUnmounted(() => {
       title="菜单/设置"
       @click.stop="toggle"
     >
-      设置
+      <span class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
     </button>
 
     <div v-if="open" class="menu glass-card" @click.stop>
@@ -90,7 +94,7 @@ onUnmounted(() => {
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(80, 80, 80, 0.85);
   color: var(--text-light);
   font-size: 0.8rem;
   cursor: pointer;
@@ -100,7 +104,25 @@ onUnmounted(() => {
   justify-content: center;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(100, 100, 100, 0.95);
+  }
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 18px;
+  height: 18px;
+
+  span {
+    display: block;
+    width: 16px;
+    height: 2px;
+    background: #fff;
+    border-radius: 1px;
   }
 }
 

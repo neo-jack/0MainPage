@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { Github } from "@icon-park/vue-next";
+import { useLocaleStore } from "../store/locale";
+import { zh, en } from "../i18n";
+import { computed } from "vue";
+
+const localeStore = useLocaleStore();
+const t = computed(() => localeStore.locale === "zh" ? zh : en);
 
 // 个人信息配置
 const profile = {
-  avatar: "https://avatars.githubusercontent.com/u/1?v=4", // 替换为你的头像
+  avatar: "/avatar.png", // 替换为你的头像
   name: "Laaaanbq",
-  description: "一个简单的个人导航主页",
   github: "https://github.com/your-username",
 };
 </script>
@@ -21,7 +26,7 @@ const profile = {
     <h1 class="name">{{ profile.name }}</h1>
 
     <!-- 描述 -->
-    <p class="description">{{ profile.description }}</p>
+    <p class="description">{{ t.profile.description }}</p>
 
     <!-- 社交链接 -->
     <div class="social-links">
@@ -33,6 +38,7 @@ const profile = {
       >
         <Github theme="filled" size="24" fill="#fff" />
       </a>
+      <span class="author-name">@蓝斌铨</span>
     </div>
   </div>
 </template>
@@ -82,6 +88,15 @@ const profile = {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  position: relative; /* 为绝对定位的子元素提供参考 */
+  align-items: center;
+}
+
+.author-name {
+  position: absolute;
+  right: 0;
+  font-size: 0.75rem; /* 小字 */
+  color: rgba(255, 255, 255, 0.6); /* 淡色显示 */
 }
 
 .social-link {

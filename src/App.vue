@@ -8,8 +8,15 @@ import ThemeSwitch from "./components/ThemeSwitch.vue";
 import FooterInfo from "./components/FooterInfo.vue";
 import SettingsMenu from "./components/SettingsMenu.vue";
 import { useWeatherStore } from "./store/weather";
+import { useLocaleStore } from "./store/locale";
+import { zh, en } from "./i18n";
+import { computed } from "vue";
 
 const weatherStore = useWeatherStore();
+const localeStore = useLocaleStore();
+
+// 国际化文案
+const t = computed(() => localeStore.locale === "zh" ? zh : en);
 const isLoaded = ref(false);
 
 watch(
@@ -21,6 +28,8 @@ watch(
 );
 
 onMounted(() => {
+  // 初始化语言设置
+  localeStore.init();
   // 初始化天气数据
   weatherStore.init();
   
@@ -40,6 +49,25 @@ onMounted(() => {
     <Transition name="fade">
       <main v-if="isLoaded" class="main-content">
         <div class="main-actions">
+          <!-- 语言切换按钮 -->
+          <button
+            class="locale-toggle-btn"
+            type="button"
+            title="切换语言"
+            @click="localeStore.toggleLocale"
+          >
+            {{ t.locale.switch }}
+          </button>
+          <!-- 主题切换按钮 -->
+          <button
+            class="theme-toggle-btn"
+            type="button"
+            :title="weatherStore.darkMode ? t.theme.toLight : t.theme.toDark"
+            @click="weatherStore.toggleDarkMode"
+          >
+            <span v-if="weatherStore.darkMode" class="icon">&#9728;</span>
+            <span v-else class="icon">&#9790;</span>
+          </button>
           <SettingsMenu />
         </div>
         <div class="content-wrapper">
@@ -90,6 +118,52 @@ onMounted(() => {
   top: 1.25rem;
   right: 1.25rem;
   z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.locale-toggle-btn {
+  height: 42px;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 21px;
+  background: rgba(80, 80, 80, 0.85);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(100, 100, 100, 0.95);
+  }
+}
+
+.theme-toggle-btn {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(80, 80, 80, 0.85);
+  color: var(--text-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(100, 100, 100, 0.95);
+  }
+
+  .icon {
+    line-height: 1;
+  }
 }
 
 .content-wrapper {
@@ -116,6 +190,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding: 0rem  0  1rem 0;
 }
 
 .top-bar {
@@ -124,7 +199,6 @@ onMounted(() => {
   gap: 0.75rem;
   width: 100%;
   box-sizing: border-box;
-  margin-top: -1rem;
   margin-bottom: 1rem;
 }
 

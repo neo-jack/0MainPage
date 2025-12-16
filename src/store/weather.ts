@@ -34,6 +34,7 @@ export const useWeatherStore = defineStore("weather", () => {
   const error = ref<string | null>(null);
   const autoTheme = ref(true); // 天气自动调节开关
   const manualTheme = ref<string>("#4a9eff"); // 手动选择的主题色
+  const darkMode = ref(true); // 暗黑模式开关
 
   // 计算属性
   const weatherType = computed<WeatherType>(() => {
@@ -125,6 +126,13 @@ export const useWeatherStore = defineStore("weather", () => {
     localStorage.setItem("manualTheme", color);
   };
 
+  // 切换暗黑模式
+  const toggleDarkMode = () => {
+    darkMode.value = !darkMode.value;
+    localStorage.setItem("darkMode", String(darkMode.value));
+    document.documentElement.classList.toggle("light-mode", !darkMode.value);
+  };
+
   // 初始化
   const init = () => {
     // 恢复设置
@@ -138,6 +146,13 @@ export const useWeatherStore = defineStore("weather", () => {
       manualTheme.value = savedManualTheme;
     }
 
+    // 恢复暗黑模式设置
+    const savedDarkMode = localStorage.getItem("darkMode");
+    if (savedDarkMode !== null) {
+      darkMode.value = savedDarkMode === "true";
+      document.documentElement.classList.toggle("light-mode", !darkMode.value);
+    }
+
     // 获取天气
     fetchWeather();
   };
@@ -148,11 +163,13 @@ export const useWeatherStore = defineStore("weather", () => {
     error,
     autoTheme,
     manualTheme,
+    darkMode,
     weatherType,
     themeColor,
     fetchWeather,
     toggleAutoTheme,
     setManualTheme,
+    toggleDarkMode,
     init,
   };
 });

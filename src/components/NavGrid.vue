@@ -7,6 +7,10 @@ import {
   DatabaseConfig,
 } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../config/nav";
+import { useLocaleStore } from "../store/locale";
+import { computed } from "vue";
+
+const localeStore = useLocaleStore();
 
 // 图标映射
 const iconMap: Record<string, any> = {
@@ -15,6 +19,11 @@ const iconMap: Record<string, any> = {
   DataFile: FileCode,
   Server,
   Database: DatabaseConfig,
+};
+
+// 获取描述文字
+const getDescription = (item: NavItem) => {
+  return localeStore.locale === "zh" ? item.description : item.descriptionEn;
 };
 
 // 跳转链接
@@ -28,15 +37,21 @@ const handleClick = (item: NavItem) => {
     <div
       v-for="item in navItems"
       :key="item.id"
-      class="nav-item glass-card"
+      class="nav-card"
       :style="{ '--item-color': item.color }"
       @click="handleClick(item)"
     >
-      <div class="icon-wrapper">
-        <component :is="iconMap[item.icon]" size="24" :fill="item.color" />
+      <div class="card-header">
+        <div class="icon-wrapper">
+          <component :is="iconMap[item.icon]" size="20" fill="#fff" />
+        </div>
+        <span class="project-name">{{ item.name }}</span>
       </div>
-      <span class="name">{{ item.name }}</span>
-      <span class="arrow">→</span>
+      <p class="description">{{ getDescription(item) }}</p>
+      <div class="tags">
+        <span v-for="tech in item.techStack" :key="tech" class="tag tech">{{ tech }}</span>
+        <span v-for="hl in item.highlights" :key="hl" class="tag highlight">{{ hl }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -51,26 +66,18 @@ const handleClick = (item: NavItem) => {
   opacity: 0;
 }
 
-.nav-item {
-  display: flex;
-  align-items: center;
+.nav-card {
   padding: 1rem 1.25rem;
   cursor: pointer;
-  color: var(--text-light);
+  color: #fff;
+  background: var(--item-color);
+  border-radius: 12px;
   transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(4px);
-
-    .arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .icon-wrapper {
-      background: var(--item-color);
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   }
 
   &:active {
@@ -78,29 +85,50 @@ const handleClick = (item: NavItem) => {
   }
 }
 
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 .icon-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  margin-right: 1rem;
-  transition: all 0.3s;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-right: 0.75rem;
 }
 
-.name {
-  flex: 1;
+.project-name {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.arrow {
-  font-size: 1.2rem;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.3s;
-  color: var(--text-muted);
+.description {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+
+  &.highlight {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 </style>
