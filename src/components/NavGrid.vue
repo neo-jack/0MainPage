@@ -64,20 +64,36 @@ const handleClick = (item: NavItem) => {
   animation: fade-in 0.6s ease forwards;
   animation-delay: 0.2s;
   opacity: 0;
+  max-height: 320px;
+  overflow-y: auto;
+
+  // 自定义滚动条
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
 }
 
 .nav-card {
   padding: 1rem 1.25rem;
   cursor: pointer;
-  color: #fff;
-  background: var(--item-color);
+  color: var(--text-light, #fff);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   transition: all 0.3s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
   }
 
   &:active {
@@ -98,7 +114,7 @@ const handleClick = (item: NavItem) => {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--item-color);
   margin-right: 0.75rem;
 }
 
@@ -117,18 +133,29 @@ const handleClick = (item: NavItem) => {
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .tag {
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.9);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
 
-  &.highlight {
-    background: rgba(255, 255, 255, 0.3);
+  // 圆点样式
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--item-color);
+  }
+
+  &.highlight::before {
+    background: #ff9500;
   }
 }
 </style>

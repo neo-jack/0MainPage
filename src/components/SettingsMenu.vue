@@ -22,16 +22,6 @@ const handleDocumentClick = (e: MouseEvent) => {
   close();
 };
 
-const refreshWeather = async () => {
-  await weatherStore.fetchWeather();
-  close();
-};
-
-const toggleAutoTheme = () => {
-  weatherStore.toggleAutoTheme();
-  close();
-};
-
 const clearCacheAndReload = () => {
   // 仅清理本项目用到的 key
   localStorage.removeItem("weatherCache");
@@ -66,12 +56,6 @@ onUnmounted(() => {
     </button>
 
     <div v-if="open" class="menu glass-card" @click.stop>
-      <button class="menu-item" type="button" @click="refreshWeather">
-        刷新天气
-      </button>
-      <button class="menu-item" type="button" @click="toggleAutoTheme">
-        {{ weatherStore.autoTheme ? "关闭自动主题" : "开启自动主题" }}
-      </button>
       <button
         class="menu-item danger"
         type="button"
