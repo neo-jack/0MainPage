@@ -8,7 +8,6 @@ import {
 } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../config/nav";
 import { useLocaleStore } from "../store/locale";
-import { computed } from "vue";
 
 const localeStore = useLocaleStore();
 
@@ -49,8 +48,12 @@ const handleClick = (item: NavItem) => {
       </div>
       <p class="description">{{ getDescription(item) }}</p>
       <div class="tags">
-        <span v-for="tech in item.techStack" :key="tech" class="tag tech">{{ tech }}</span>
-        <span v-for="hl in item.highlights" :key="hl" class="tag highlight">{{ hl }}</span>
+        <span v-for="tech in item.techStack" :key="tech" class="tag tech">{{
+          tech
+        }}</span>
+        <span v-for="hl in item.highlights" :key="hl" class="tag highlight">{{
+          hl
+        }}</span>
       </div>
     </div>
   </div>
@@ -139,7 +142,7 @@ const handleClick = (item: NavItem) => {
 
   // 圆点样式
   &::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 6px;
     height: 6px;

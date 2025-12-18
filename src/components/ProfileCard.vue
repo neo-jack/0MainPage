@@ -108,6 +108,7 @@ const profile = {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   transition: all 0.3s;
+  line-height: 0;
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);

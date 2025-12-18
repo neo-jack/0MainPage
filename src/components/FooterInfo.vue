@@ -14,7 +14,7 @@ const currentYear = new Date().getFullYear();
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.85rem;

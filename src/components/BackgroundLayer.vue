@@ -51,6 +51,7 @@ interface Leaf {
   size: number;
   rotate: number;
   delay: number;
+  duration: number;
 }
 const leaves = ref<Leaf[]>([]);
 
@@ -126,7 +127,7 @@ onMounted(() => {
   clouds.value = cloudList;
 
   // 生成叶片（左右两侧分布）
-  const leafCount = 8;
+  const leafCount = 4;
   const leafList: Leaf[] = [];
   for (let i = 0; i < leafCount; i++) {
     const side: 'left' | 'right' = i < leafCount / 2 ? 'left' : 'right';
@@ -134,10 +135,11 @@ onMounted(() => {
       id: i,
       side,
       top: 10 + Math.random() * 70,
-      offset: 20 + Math.random() * 80,
-      size: 0.5 + Math.random() * 0.3,
+      offset: Math.random() * 170,
+      size: 0.3 + Math.random() * 0.2,
       rotate: side === 'left' ? (-30 + Math.random() * 60) : (120 + Math.random() * 60),
       delay: Math.random() * 2,
+      duration: 3 + Math.random() * 4,
     });
   }
   leaves.value = leafList;
@@ -251,6 +253,7 @@ onUnmounted(() => {
           top: leaf.top + '%',
           transform: 'rotate(' + leaf.rotate + 'deg) scale(' + leaf.size + ')',
           animationDelay: leaf.delay + 's',
+          animationDuration: leaf.duration + 's',
         }"
       ></div>
     </div>

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { useWeatherStore } from "../store/weather";
-
-const weatherStore = useWeatherStore();
 
 const open = ref(false);
 const rootRef = ref<HTMLElement | null>(null);

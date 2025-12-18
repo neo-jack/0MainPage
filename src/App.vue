@@ -4,7 +4,6 @@ import BackgroundLayer from "./components/BackgroundLayer.vue";
 import ProfileCard from "./components/ProfileCard.vue";
 import NavGrid from "./components/NavGrid.vue";
 import TimeWeather from "./components/TimeWeather.vue";
-import ThemeSwitch from "./components/ThemeSwitch.vue";
 import FooterInfo from "./components/FooterInfo.vue";
 import SettingsMenu from "./components/SettingsMenu.vue";
 import { useWeatherStore } from "./store/weather";
@@ -16,7 +15,7 @@ const weatherStore = useWeatherStore();
 const localeStore = useLocaleStore();
 
 // 国际化文案
-const t = computed(() => localeStore.locale === "zh" ? zh : en);
+const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 const isLoaded = ref(false);
 
 watch(
@@ -32,7 +31,7 @@ onMounted(() => {
   localeStore.init();
   // 初始化天气数据
   weatherStore.init();
-  
+
   // 页面加载完成后显示内容
   setTimeout(() => {
     isLoaded.value = true;
@@ -162,7 +161,7 @@ onMounted(() => {
   }
 
   .icon {
-    line-height: 1;
+    line-height: 0;
   }
 }
 
@@ -175,8 +174,9 @@ onMounted(() => {
   padding: 0 2rem;
   gap: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 50px auto;
   width: 100%;
+
 }
 
 .left-section {
@@ -190,7 +190,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0rem  0  1rem 0;
+  padding: 0rem 0 1rem 0;
 }
 
 .top-bar {
