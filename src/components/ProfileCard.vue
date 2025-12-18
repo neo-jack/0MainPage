@@ -11,7 +11,7 @@ const t = computed(() => localeStore.locale === "zh" ? zh : en);
 const profile = {
   avatar: "/avatar.png", // 替换为你的头像
   name: "Laaaanbq",
-  github: "https://github.com/your-username",
+  github: "https://github.com/neo-jack",
 };
 </script>
 
