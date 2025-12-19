@@ -19,14 +19,14 @@ const handleDocumentClick = (e: MouseEvent) => {
   close();
 };
 
-const clearCacheAndReload = () => {
-  // 仅清理本项目用到的 key
-  localStorage.removeItem("autoTheme");
-  localStorage.removeItem("manualTheme");
-  localStorage.removeItem("darkMode");
-  close();
-  window.location.reload();
-};
+// const clearCacheAndReload = () => {
+//   // 仅清理本项目用到的 key
+//   localStorage.removeItem("autoTheme");
+//   localStorage.removeItem("manualTheme");
+//   localStorage.removeItem("darkMode");
+//   close();
+//   window.location.reload();
+// };
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
@@ -61,7 +61,6 @@ onUnmounted(() => {
       >
         网站风格参考链接
       </a>
- 
     </div>
   </div>
 </template>

@@ -18,9 +18,9 @@ const selectColor = (color: string) => {
 };
 
 // 切换自动主题
-const toggleAutoTheme = () => {
-  themeStore.toggleAutoTheme();
-};
+// const toggleAutoTheme = () => {
+//   themeStore.toggleAutoTheme();
+// };
 </script>
 
 <template>

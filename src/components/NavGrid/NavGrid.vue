@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { LinkOne } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../../config/nav";
 import { useLocaleStore } from "../../store/locale";
 import { ref, onMounted } from "vue";
@@ -16,7 +15,7 @@ const getDescription = (item: NavItem) => {
 const checkSiteStatus = async (url: string): Promise<boolean> => {
   try {
     // 由于浏览器CORS限制，我们使用fetch with no-cors模式来检测
-    const response = await fetch(url, {
+    await fetch(url, {
       method: "HEAD",
       mode: "no-cors",
       cache: "no-cache",
