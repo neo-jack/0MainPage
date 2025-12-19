@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import BackgroundLayer from "./components/BackgroundLayer.vue";
 import ProfileCard from "./components/ProfileCard.vue";
 import NavGrid from "./components/NavGrid.vue";
-import TimeWeather from "./components/TimeWeather.vue";
 import FooterInfo from "./components/FooterInfo.vue";
 import SettingsMenu from "./components/SettingsMenu.vue";
-import { useWeatherStore } from "./store/weather";
 import { useLocaleStore } from "./store/locale";
+import { useThemeStore } from "./store/theme";
 import { zh, en } from "./i18n";
-import { computed } from "vue";
 
-const weatherStore = useWeatherStore();
 const localeStore = useLocaleStore();
+const themeStore = useThemeStore();
 
 // 国际化文案
 const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 const isLoaded = ref(false);
 
+// 监听主题色变化
 watch(
-  () => weatherStore.themeColor,
+  () => themeStore.themeColor,
   (color) => {
     document.documentElement.style.setProperty("--primary-color", color);
   },
@@ -29,8 +28,8 @@ watch(
 onMounted(() => {
   // 初始化语言设置
   localeStore.init();
-  // 初始化天气数据
-  weatherStore.init();
+  // 初始化主题设置
+  themeStore.init();
 
   // 页面加载完成后显示内容
   setTimeout(() => {
@@ -40,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="app-container" :class="weatherStore.weatherType">
+  <div class="app-container" :class="{ 'dark-mode': themeStore.darkMode }">
     <!-- 背景层 -->
     <BackgroundLayer />
 
@@ -61,10 +60,10 @@ onMounted(() => {
           <button
             class="theme-toggle-btn"
             type="button"
-            :title="weatherStore.darkMode ? t.theme.toLight : t.theme.toDark"
-            @click="weatherStore.toggleDarkMode"
+            :title="themeStore.darkMode ? t.theme.toLight : t.theme.toDark"
+            @click="themeStore.toggleDarkMode"
           >
-            <span v-if="weatherStore.darkMode" class="icon">&#9728;</span>
+            <span v-if="themeStore.darkMode" class="icon">&#9728;</span>
             <span v-else class="icon">&#9790;</span>
           </button>
           <SettingsMenu />
@@ -77,9 +76,9 @@ onMounted(() => {
 
           <!-- 右侧：功能区 -->
           <section class="right-section">
-            <!-- 时间天气 + 主题切换 -->
+            <!-- 功能区顶部 -->
             <div class="top-bar">
-              <TimeWeather />
+              <!-- 这里可以放置其他组件 -->
             </div>
             <!-- 导航网格 -->
             <NavGrid />
@@ -176,7 +175,6 @@ onMounted(() => {
   max-width: 1200px;
   margin: 50px auto;
   width: 100%;
-
 }
 
 .left-section {

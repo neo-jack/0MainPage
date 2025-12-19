@@ -35,7 +35,6 @@ export default {
   },
   // 设置菜单
   settings: {
-    refreshWeather: "刷新天气",
     autoThemeOn: "关闭自动主题",
     autoThemeOff: "开启自动主题",
     clearCache: "清除缓存并刷新",

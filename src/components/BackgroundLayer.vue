@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
-import { useWeatherStore } from "../store/weather";
+import { useThemeStore } from "../store/theme";
 
-const weatherStore = useWeatherStore();
+const themeStore = useThemeStore();
 
 // 根据暗黑模式计算背景样式
 const backgroundStyle = computed(() => {
-  if (weatherStore.darkMode) {
+  if (themeStore.darkMode) {
     // 黑夜背景：深色渐变
     return {
-      background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)",
+      background:
+        "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)",
     };
   } else {
     // 白天背景：浅色渐变
     return {
-      background: "linear-gradient(135deg, #e8f4f8 0%, #d4e8ed 50%, #c9dfe6 100%)",
+      background:
+        "linear-gradient(135deg, #e8f4f8 0%, #d4e8ed 50%, #c9dfe6 100%)",
     };
   }
 });
@@ -45,7 +47,7 @@ const clouds = ref<Cloud[]>([]);
 // 叶片数据（左右两边随机分布）
 interface Leaf {
   id: number;
-  side: 'left' | 'right';
+  side: "left" | "right";
   top: number;
   offset: number;
   size: number;
@@ -79,10 +81,10 @@ const generateMeteor = () => {
     duration: 1.5 + Math.random() * 1,
   };
   meteors.value.push(newMeteor);
-  
+
   // 动画结束后移除
   setTimeout(() => {
-    meteors.value = meteors.value.filter(m => m.id !== id);
+    meteors.value = meteors.value.filter((m) => m.id !== id);
   }, newMeteor.duration * 1000 + 500);
 };
 
@@ -130,14 +132,15 @@ onMounted(() => {
   const leafCount = 4;
   const leafList: Leaf[] = [];
   for (let i = 0; i < leafCount; i++) {
-    const side: 'left' | 'right' = i < leafCount / 2 ? 'left' : 'right';
+    const side: "left" | "right" = i < leafCount / 2 ? "left" : "right";
     leafList.push({
       id: i,
       side,
       top: 10 + Math.random() * 70,
       offset: Math.random() * 170,
       size: 0.3 + Math.random() * 0.2,
-      rotate: side === 'left' ? (-30 + Math.random() * 60) : (120 + Math.random() * 60),
+      rotate:
+        side === "left" ? -30 + Math.random() * 60 : 120 + Math.random() * 60,
       delay: Math.random() * 2,
       duration: 3 + Math.random() * 4,
     });
@@ -146,7 +149,7 @@ onMounted(() => {
 
   // 初始生成一个流星
   generateMeteor();
-  
+
   // 随机间隔生成流星
   meteorTimer = setInterval(() => {
     generateMeteor();
@@ -163,7 +166,7 @@ onUnmounted(() => {
 <template>
   <div class="background-layer" :style="backgroundStyle">
     <!-- 成对星点层 - 仅暗黑模式显示 -->
-    <div v-if="weatherStore.darkMode" class="star-pairs-layer">
+    <div v-if="themeStore.darkMode" class="star-pairs-layer">
       <div
         v-for="pair in starPairs"
         :key="'pair-' + pair.id"
@@ -209,7 +212,7 @@ onUnmounted(() => {
     </div>
 
     <!-- 移动云朵 -->
-    <div v-if="weatherStore.darkMode" class="clouds-layer">
+    <div v-if="themeStore.darkMode" class="clouds-layer">
       <div
         v-for="cloud in clouds"
         :key="'cloud-' + cloud.id"
@@ -226,7 +229,7 @@ onUnmounted(() => {
     </div>
 
     <!-- 流星（随机位置） -->
-    <template v-if="weatherStore.darkMode">
+    <template v-if="themeStore.darkMode">
       <div
         v-for="meteor in meteors"
         :key="'meteor-' + meteor.id"
@@ -243,7 +246,7 @@ onUnmounted(() => {
     </template>
 
     <!-- 叶片装饰（左右两侧分布） -->
-    <div v-if="weatherStore.darkMode" class="leaves-layer">
+    <div v-if="themeStore.darkMode" class="leaves-layer">
       <div
         v-for="leaf in leaves"
         :key="'leaf-' + leaf.id"
@@ -282,7 +285,8 @@ onUnmounted(() => {
 }
 
 @keyframes pair-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0);
   }
   25% {
@@ -298,13 +302,19 @@ onUnmounted(() => {
 
 .star {
   position: absolute;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 255, 255, 0) 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.5) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
   border-radius: 50%;
   animation: twinkle 2.5s ease-in-out infinite;
 }
 
 @keyframes twinkle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: scale(1);
   }
@@ -356,10 +366,8 @@ onUnmounted(() => {
   height: 70px !important;
   background: rgba(200, 210, 230, 1);
   border-radius: 50%;
-  box-shadow: 
-    35px 8px 0 5px rgba(190, 200, 220, 1),
-    70px 3px 0 -5px rgba(180, 190, 210, 1),
-    -25px 5px 0 0 rgba(210, 220, 240, 1);
+  box-shadow: 35px 8px 0 5px rgba(190, 200, 220, 1),
+    70px 3px 0 -5px rgba(180, 190, 210, 1), -25px 5px 0 0 rgba(210, 220, 240, 1);
   animation: cloud-move linear infinite;
 }
 
@@ -382,10 +390,15 @@ onUnmounted(() => {
 .meteor-head {
   width: 8px;
   height: 8px;
-  background: radial-gradient(circle, #fff 0%, #ff6b9d 40%, rgba(255, 107, 157, 0.5) 70%, transparent 100%);
+  background: radial-gradient(
+    circle,
+    #fff 0%,
+    #ff6b9d 40%,
+    rgba(255, 107, 157, 0.5) 70%,
+    transparent 100%
+  );
   border-radius: 50%;
-  box-shadow: 
-    0 0 8px 3px rgba(255, 255, 255, 0.8),
+  box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.8),
     0 0 15px 5px rgba(255, 107, 157, 0.7),
     0 0 30px 10px rgba(255, 107, 157, 0.4);
 }
@@ -398,12 +411,18 @@ onUnmounted(() => {
   transform-origin: right center;
   width: 100px;
   height: 3px;
-  background: linear-gradient(to left, rgba(255, 107, 157, 0.9), rgba(255, 182, 193, 0.5), rgba(255, 200, 210, 0.2), transparent);
+  background: linear-gradient(
+    to left,
+    rgba(255, 107, 157, 0.9),
+    rgba(255, 182, 193, 0.5),
+    rgba(255, 200, 210, 0.2),
+    transparent
+  );
   border-radius: 3px;
   filter: blur(1px);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -2px;
     left: 0;
@@ -440,13 +459,17 @@ onUnmounted(() => {
   position: absolute;
   width: 25px;
   height: 45px;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.5) 0%, rgba(56, 142, 60, 0.25) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(76, 175, 80, 0.5) 0%,
+    rgba(56, 142, 60, 0.25) 100%
+  );
   border-radius: 0 80% 0 80%;
   animation: leaf-sway 4s ease-in-out infinite;
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 50%;
     top: 10%;
@@ -457,23 +480,30 @@ onUnmounted(() => {
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 30%;
     top: 20%;
     width: 40%;
     height: 60%;
-    background: linear-gradient(135deg, rgba(100, 200, 100, 0.2) 0%, transparent 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(100, 200, 100, 0.2) 0%,
+      transparent 100%
+    );
     border-radius: 0 80% 0 80%;
   }
 }
 
 @keyframes leaf-sway {
-  0%, 100% {
-    transform: rotate(var(--leaf-rotate, 0deg)) scale(var(--leaf-scale, 1)) translateX(0);
+  0%,
+  100% {
+    transform: rotate(var(--leaf-rotate, 0deg)) scale(var(--leaf-scale, 1))
+      translateX(0);
   }
   50% {
-    transform: rotate(calc(var(--leaf-rotate, 0deg) + 8deg)) scale(var(--leaf-scale, 1)) translateX(5px);
+    transform: rotate(calc(var(--leaf-rotate, 0deg) + 8deg))
+      scale(var(--leaf-scale, 1)) translateX(5px);
   }
 }
 </style>

@@ -1,24 +1,9 @@
 <script setup lang="ts">
-import {
-  Application,
-  LayoutOne,
-  FileCode,
-  Server,
-  DatabaseConfig,
-} from "@icon-park/vue-next";
+import { LinkOne } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../config/nav";
 import { useLocaleStore } from "../store/locale";
 
 const localeStore = useLocaleStore();
-
-// 图标映射
-const iconMap: Record<string, any> = {
-  Application,
-  Layout: LayoutOne,
-  DataFile: FileCode,
-  Server,
-  Database: DatabaseConfig,
-};
 
 // 获取描述文字
 const getDescription = (item: NavItem) => {
@@ -42,7 +27,7 @@ const handleClick = (item: NavItem) => {
     >
       <div class="card-header">
         <div class="icon-wrapper">
-          <component :is="iconMap[item.icon]" size="20" fill="#fff" />
+          <LinkOne size="20" fill="#fff" />
         </div>
         <span class="project-name">{{ item.name }}</span>
       </div>
@@ -110,10 +95,29 @@ const handleClick = (item: NavItem) => {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: var(--item-color);
   margin-right: 0.75rem;
+  position: relative; // 三角形伪元素定位
+  overflow: hidden; // 把三角裁在这个小方块里面
+  background: transparent; // 实际背景交给 ::before
 }
-
+.icon-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  // 裁出一个上尖下宽的等腰三角形
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+  // 彩色渐变：首尾用 var(--bg-color)，暗色下偏暗，亮色下偏亮
+  background: conic-gradient(
+    from 210deg,
+    var(--bg-color),
+    #ff6b6b,
+    #f7d94c,
+    #4adede,
+    #a66bff,
+    var(--bg-color)
+  );
+  opacity: 0.9;
+}
 .project-name {
   font-size: 1rem;
   font-weight: 600;

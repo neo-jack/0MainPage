@@ -21,9 +21,9 @@ const handleDocumentClick = (e: MouseEvent) => {
 
 const clearCacheAndReload = () => {
   // 仅清理本项目用到的 key
-  localStorage.removeItem("weatherCache");
   localStorage.removeItem("autoTheme");
   localStorage.removeItem("manualTheme");
+  localStorage.removeItem("darkMode");
   close();
   window.location.reload();
 };

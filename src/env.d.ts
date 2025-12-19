@@ -7,7 +7,6 @@ declare module '*.vue' {
 }
 
 interface ImportMetaEnv {
-  readonly VITE_OPENWEATHER_API_KEY: string;
   readonly VITE_SITE_NAME: string;
   readonly VITE_SITE_DESCRIPTION: string;
 }

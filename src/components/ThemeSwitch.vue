@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useWeatherStore } from "../store/weather";
+import { useThemeStore } from "../store/theme";
 
-const weatherStore = useWeatherStore();
+const themeStore = useThemeStore();
 
 // 预设主题色
 const themeColors = [
@@ -12,8 +12,14 @@ const themeColors = [
   { name: "紫色", color: "#af52de" },
 ];
 
+// 选择颜色
 const selectColor = (color: string) => {
-  weatherStore.setManualTheme(color);
+  themeStore.setManualTheme(color);
+};
+
+// 切换自动主题
+const toggleAutoTheme = () => {
+  themeStore.toggleAutoTheme();
 };
 </script>
 
@@ -21,19 +27,19 @@ const selectColor = (color: string) => {
   <div class="theme-switch">
     <button
       class="auto-btn"
-      :class="{ active: weatherStore.autoTheme }"
-      @click="weatherStore.toggleAutoTheme"
+      :class="{ active: themeStore.autoTheme }"
+      @click="themeStore.toggleAutoTheme"
       title="自动主题"
     >
       自动
     </button>
-    <div v-if="!weatherStore.autoTheme" class="color-picker">
+    <div v-if="!themeStore.autoTheme" class="color-picker">
       <button
         v-for="theme in themeColors"
         :key="theme.color"
         class="color-btn"
         :style="{ backgroundColor: theme.color }"
-        :class="{ active: weatherStore.manualTheme === theme.color }"
+        :class="{ active: themeStore.manualTheme === theme.color }"
         :title="theme.name"
         @click="selectColor(theme.color)"
       />
