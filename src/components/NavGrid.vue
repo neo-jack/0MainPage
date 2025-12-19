@@ -2,18 +2,48 @@
 import { LinkOne } from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem } from "../config/nav";
 import { useLocaleStore } from "../store/locale";
+import { ref, onMounted } from "vue";
 
 const localeStore = useLocaleStore();
+const siteStatus = ref<Record<string, boolean>>({});
 
 // 获取描述文字
 const getDescription = (item: NavItem) => {
   return localeStore.locale === "zh" ? item.description : item.descriptionEn;
 };
 
+// 检测网站状态
+const checkSiteStatus = async (url: string): Promise<boolean> => {
+  try {
+    // 由于浏览器CORS限制，我们使用fetch with no-cors模式来检测
+    const response = await fetch(url, {
+      method: "HEAD",
+      mode: "no-cors",
+      cache: "no-cache",
+    });
+    return true; // 如果没有抛出错误，认为网站可访问
+  } catch (error) {
+    return false; // 如果抛出错误，认为网站不可访问
+  }
+};
+
+// 初始化所有网站状态检测
+const initSiteStatus = async () => {
+  for (const item of navItems) {
+    const url = getNavUrl(item);
+    const isOnline = await checkSiteStatus(url);
+    siteStatus.value[item.id] = isOnline;
+  }
+};
+
 // 跳转链接
 const handleClick = (item: NavItem) => {
   window.open(getNavUrl(item), "_blank");
 };
+
+onMounted(() => {
+  initSiteStatus();
+});
 </script>
 
 <template>
@@ -26,10 +56,23 @@ const handleClick = (item: NavItem) => {
       @click="handleClick(item)"
     >
       <div class="card-header">
-        <div class="icon-wrapper">
-          <LinkOne size="20" fill="#fff" />
+        <div class="left-section">
+          <div
+            class="status-dot"
+            :class="{
+              online: siteStatus[item.id],
+              offline: !siteStatus[item.id],
+            }"
+          ></div>
+          <span class="project-name">{{ item.name }}</span>
         </div>
-        <span class="project-name">{{ item.name }}</span>
+        <div class="github-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+        </div>
       </div>
       <p class="description">{{ getDescription(item) }}</p>
       <div class="tags">
@@ -85,39 +128,48 @@ const handleClick = (item: NavItem) => {
 .card-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
 }
 
-.icon-wrapper {
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #666;
+  transition: all 0.3s ease;
+
+  &.online {
+    background-color: #00ff00;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+  }
+
+  &.offline {
+    background-color: #ff0000;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+  }
+}
+
+.github-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  margin-right: 0.75rem;
-  position: relative; // 三角形伪元素定位
-  overflow: hidden; // 把三角裁在这个小方块里面
-  background: transparent; // 实际背景交给 ::before
+  color: var(--text-light);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
-.icon-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  // 裁出一个上尖下宽的等腰三角形
-  clip-path: polygon(50% 0, 0 100%, 100% 100%);
-  // 彩色渐变：首尾用 var(--bg-color)，暗色下偏暗，亮色下偏亮
-  background: conic-gradient(
-    from 210deg,
-    var(--bg-color),
-    #ff6b6b,
-    #f7d94c,
-    #4adede,
-    #a66bff,
-    var(--bg-color)
-  );
-  opacity: 0.9;
+
+.github-icon:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
 }
+
 .project-name {
   font-size: 1rem;
   font-weight: 600;
