@@ -48,4 +48,8 @@ export default {
   locale: {
     switch: "English",
   },
+  // 导航栏标题
+  navTitle: {
+    text: "o--- 导航 --- o",
+  },
 };

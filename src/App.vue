@@ -78,7 +78,7 @@ onMounted(() => {
           <section class="right-section">
             <!-- 功能区顶部 -->
             <div class="top-bar">
-              <!-- 这里可以放置其他组件 -->
+              <div class="nav-title">{{ t.navTitle.text }}</div>
             </div>
             <!-- 导航网格 -->
             <NavGrid />
@@ -194,10 +194,44 @@ onMounted(() => {
 .top-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 1rem;
+}
+
+.nav-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Arial Black", "Microsoft YaHei", sans-serif;
+  background-image: linear-gradient(
+    135deg,
+    rgb(255, 107, 107),
+    rgb(78, 205, 196) 25%,
+    rgb(69, 183, 209) 50%,
+    rgb(240, 147, 251) 75%,
+    rgb(245, 87, 108)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 // 响应式适配
