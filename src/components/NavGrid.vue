@@ -95,9 +95,8 @@ onMounted(() => {
   animation: fade-in 0.6s ease forwards;
   animation-delay: 0.2s;
   opacity: 0;
-  max-height: 320px;
   overflow-y: auto;
-
+  
   // 隐藏滚动条但保留滚动功能
   scrollbar-width: none; // Firefox
   -ms-overflow-style: none; // IE/Edge

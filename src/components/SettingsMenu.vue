@@ -59,15 +59,9 @@ onUnmounted(() => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        网站参考链接
+        网站风格参考链接
       </a>
-      <button
-        class="menu-item danger"
-        type="button"
-        @click="clearCacheAndReload"
-      >
-        刷新
-      </button>
+ 
     </div>
   </div>
 </template>

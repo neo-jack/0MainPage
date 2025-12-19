@@ -4,7 +4,7 @@ const currentYear = new Date().getFullYear();
 
 <template>
   <footer class="footer-info">
-    <p>© {{ currentYear }} Your Name. All rights reserved.</p>
+    <p>© {{ currentYear }} Lanbinquan. All rights reserved.</p>
   </footer>
 </template>
 

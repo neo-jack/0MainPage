@@ -170,11 +170,12 @@ onMounted(() => {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0 2rem;
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1200px;
-  margin: 50px auto;
+  margin: 4em auto 20px auto;
   width: 100%;
+  min-height: 0;  /* 允许flex子项收缩 */
+  overflow: hidden;  /* 防止溢出 */
 }
 
 .left-section {
@@ -183,12 +184,12 @@ onMounted(() => {
 }
 
 .right-section {
-  flex: 0 0 auto;
+  flex: 0 0 auto; 
   width: 400px;
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0rem 0 1rem 0;
+  max-height: 380px; 
 }
 
 .top-bar {
@@ -238,13 +239,21 @@ onMounted(() => {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
+    
+    padding: 5rem 1rem 2rem 1rem;
+    height: 100vh;  /* 设置为全屏高度 */
+    margin: 0 auto;  /* 移除上下边距 */
   }
 
-  .left-section,
+  .left-section{
+    width: 380px; 
+  }
+
   .right-section {
     width: 100%;
+    max-height: 500px;
+    flex: 1; /* 让right-section占据剩余空间 */
+    min-height: 100px;
   }
 }
 
