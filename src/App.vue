@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from "vue";
-import BackgroundLayer from "./components/BackgroundLayer.vue";
-import ProfileCard from "./components/ProfileCard.vue";
-import NavGrid from "./components/NavGrid.vue";
-import FooterInfo from "./components/FooterInfo.vue";
-import SettingsMenu from "./components/SettingsMenu.vue";
+import { BackgroundLayer } from "./components/BackgroundLayer";
+import { ProfileCard } from "./components/ProfileCard";
+import { NavGrid } from "./components/NavGrid";
+import { FooterInfo } from "./components/FooterInfo";
+import { SettingsMenu } from "./components/SettingsMenu";
 import { useLocaleStore } from "./store/locale";
 import { useThemeStore } from "./store/theme";
 import { zh, en } from "./i18n";
@@ -174,8 +174,8 @@ onMounted(() => {
   max-width: 1200px;
   margin: 4em auto 20px auto;
   width: 100%;
-  min-height: 0;  /* 允许flex子项收缩 */
-  overflow: hidden;  /* 防止溢出 */
+  min-height: 0; /* 允许flex子项收缩 */
+  overflow: hidden; /* 防止溢出 */
 }
 
 .left-section {
@@ -184,12 +184,12 @@ onMounted(() => {
 }
 
 .right-section {
-  flex: 0 0 auto; 
+  flex: 0 0 auto;
   width: 400px;
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-height: 380px; 
+  max-height: 380px;
 }
 
 .top-bar {
@@ -239,14 +239,14 @@ onMounted(() => {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-    
+
     padding: 5rem 1rem 2rem 1rem;
-    height: 100vh;  /* 设置为全屏高度 */
-    margin: 0 auto;  /* 移除上下边距 */
+    height: 100vh; /* 设置为全屏高度 */
+    margin: 0 auto; /* 移除上下边距 */
   }
 
-  .left-section{
-    width: 380px; 
+  .left-section {
+    width: 100%;
   }
 
   .right-section {

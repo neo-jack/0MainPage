@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Github } from "@icon-park/vue-next";
-import { useLocaleStore } from "../store/locale";
-import { zh, en } from "../i18n";
+import { useLocaleStore } from "../../store/locale";
+import { zh, en } from "../../i18n";
 import { computed } from "vue";
 
 const localeStore = useLocaleStore();
-const t = computed(() => localeStore.locale === "zh" ? zh : en);
+const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 
 // 个人信息配置
 const profile = {

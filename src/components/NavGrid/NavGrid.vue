@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LinkOne } from "@icon-park/vue-next";
-import { navItems, getNavUrl, type NavItem } from "../config/nav";
-import { useLocaleStore } from "../store/locale";
+import { navItems, getNavUrl, type NavItem } from "../../config/nav";
+import { useLocaleStore } from "../../store/locale";
 import { ref, onMounted } from "vue";
 
 const localeStore = useLocaleStore();
@@ -96,7 +96,7 @@ onMounted(() => {
   animation-delay: 0.2s;
   opacity: 0;
   overflow-y: auto;
-  
+
   // 隐藏滚动条但保留滚动功能
   scrollbar-width: none; // Firefox
   -ms-overflow-style: none; // IE/Edge

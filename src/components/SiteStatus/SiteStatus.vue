@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { checkSite, getSiteList, type SiteCheckResult } from "../api/siteCheck";
-import { useLocaleStore } from "../store/locale";
-import { zh, en } from "../i18n";
+import {
+  checkSite,
+  getSiteList,
+  type SiteCheckResult,
+} from "../../api/siteCheck";
+import { useLocaleStore } from "../../store/locale";
+import { zh, en } from "../../i18n";
 import { computed } from "vue";
 
 const localeStore = useLocaleStore();
-const t = computed(() => localeStore.locale === "zh" ? zh : en);
+const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 
 const sites = ref<SiteCheckResult[]>(getSiteList());
 let checkInterval: number | null = null;
@@ -48,7 +52,12 @@ const refresh = () => {
       </button>
     </div>
     <div class="status-list">
-      <div v-for="site in sites" :key="site.id" class="status-item" :title="site.url">
+      <div
+        v-for="site in sites"
+        :key="site.id"
+        class="status-item"
+        :title="site.url"
+      >
         <span class="dot" :class="site.status"></span>
         <span class="site-name">{{ site.name }}</span>
       </div>
@@ -135,7 +144,8 @@ const refresh = () => {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
