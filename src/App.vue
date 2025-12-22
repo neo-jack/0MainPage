@@ -130,10 +130,10 @@ onMounted(() => {
 .locale-toggle-btn {
   height: 42px;
   padding: 0 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-light);
   border-radius: 21px;
-  background: rgba(80, 80, 80, 0.85);
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-solid);
+  color: var(--text-light);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -142,7 +142,7 @@ onMounted(() => {
   justify-content: center;
 
   &:hover {
-    background: rgba(100, 100, 100, 0.95);
+    opacity: 0.8;
   }
 }
 
@@ -150,10 +150,10 @@ onMounted(() => {
   width: 42px;
   height: 42px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-light);
   border-radius: 50%;
-  background: rgba(80, 80, 80, 0.85);
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--card-bg-solid);
+  color: var(--text-light);
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -162,7 +162,7 @@ onMounted(() => {
   justify-content: center;
 
   &:hover {
-    background: rgba(100, 100, 100, 0.95);
+    opacity: 0.8;
   }
 
   .icon {

@@ -74,9 +74,9 @@ onUnmounted(() => {
   width: 42px;
   height: 42px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-light);
   border-radius: 50%;
-  background: rgba(80, 80, 80, 0.85);
+  background: var(--card-bg-solid);
   color: var(--text-light);
   font-size: 0.8rem;
   cursor: pointer;
@@ -86,7 +86,7 @@ onUnmounted(() => {
   justify-content: center;
 
   &:hover {
-    background: rgba(100, 100, 100, 0.95);
+    opacity: 0.8;
   }
 }
 
@@ -103,7 +103,7 @@ onUnmounted(() => {
     display: block;
     width: 16px;
     height: 2px;
-    background: #fff;
+    background: var(--text-light);
     border-radius: 1px;
   }
 }
@@ -118,6 +118,11 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 0.25rem;
   z-index: 10;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--border-light);
 }
 
 .menu-item {
@@ -126,19 +131,22 @@ onUnmounted(() => {
   padding: 0.55rem 0.6rem;
   border-radius: 10px;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(9, 118, 124, 0.14);
   color: var(--text-light);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.14);
+    border-color: var(--border-light);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
   }
 
   &.danger {
-    color: rgba(255, 200, 200, 0.95);
+    color: rgba(255, 100, 100, 0.9);
   }
 
   &.link {
