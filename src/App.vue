@@ -132,7 +132,7 @@ onMounted(() => {
   padding: 0 1rem;
   border: 1px solid var(--border-light);
   border-radius: 21px;
-  background: var(--card-bg-solid);
+  background: var(--btn-main-actions-bg);
   color: var(--text-light);
   font-size: 0.85rem;
   cursor: pointer;
@@ -152,7 +152,7 @@ onMounted(() => {
   padding: 0;
   border: 1px solid var(--border-light);
   border-radius: 50%;
-  background: var(--card-bg-solid);
+  background: var(--btn-main-actions-bg);
   color: var(--text-light);
   font-size: 1.2rem;
   cursor: pointer;

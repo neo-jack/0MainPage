@@ -12,15 +12,18 @@
   --glass-blur: 12px;
   --bg-color: #1a1a1a;
   --bg-overlay: rgba(0, 0, 0, 0.3);
+  // 顶部 main-actions 按钮背景（默认跟暗色卡片背景保持一致）
+  --btn-main-actions-bg: var(--card-bg-solid);
 }
 
 // CSS 变量 - 亮色模式
-.light-mode  {
+.light-mode {
   --primary-color: #9EC6F3;
   --text-light: rgba(0, 0, 0, 0.8);
   --text-muted: rgba(0, 0, 0, 0.6);
   --card-bg: rgba(189, 221, 228, 0.8);
-  --card-bg-solid: #BDDDE4;
+  --card-bg-solid: rgb(174, 216, 232);
+  --btn-main-actions-bg: #BDDDE4;
   --border-light: rgba(159, 179, 223, 0.5);
   --bg-color: #9EC6F3;
   --bg-overlay: rgba(189, 221, 228, 0.3);
