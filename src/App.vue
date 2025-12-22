@@ -216,11 +216,10 @@ onMounted(() => {
   font-family: "Arial Black", "Microsoft YaHei", sans-serif;
   background-image: linear-gradient(
     135deg,
-    rgb(255, 107, 107),
-    rgb(78, 205, 196) 25%,
-    rgb(69, 183, 209) 50%,
-    rgb(240, 147, 251) 75%,
-    rgb(245, 87, 108)
+    #7a92c7,
+    #29629c 25%,
+    #138498 50%,
+    #6989cf
   );
   background-clip: text;
   -webkit-background-clip: text;
