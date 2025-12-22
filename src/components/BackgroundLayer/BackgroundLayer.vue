@@ -265,12 +265,21 @@ onUnmounted(() => {
     <div v-if="!themeStore.darkMode" class="sun-layer">
       <div class="sun">
         <div class="sun-core"></div>
-        <div class="sun-rays">
+      </div>
+    </div>
+    <!-- 蜂巢结构 - 仅在亮色模式显示 -->
+    <div v-if="!themeStore.darkMode" class="honeycomb-layer">
+      <div class="honeycomb-grid">
+        <div
+          v-for="row in 7"
+          :key="'row-' + row"
+          class="honeycomb-row"
+          :class="{ offset: row % 2 === 0 }"
+        >
           <div
-            v-for="i in 12"
-            :key="'ray-' + i"
-            class="sun-ray"
-            :style="{ transform: `rotate(${i * 30}deg)` }"
+            v-for="col in 7"
+            :key="'cell-' + row + '-' + col"
+            class="honeycomb-cell"
           ></div>
         </div>
       </div>
@@ -550,32 +559,39 @@ onUnmounted(() => {
     rgba(255, 215, 0, 0.8) 100%
   );
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.4),
-    0 0 60px rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2);
 }
-
-.sun-rays {
+// 蜂巢结构
+.honeycomb-layer {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  animation: sun-rotate 20s linear infinite;
-}
-
-.sun-ray {
-  position: absolute;
-  top: -15px;
+  top: 50%;
   left: 50%;
-  width: 3px;
-  height: 25px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 215, 0, 0.8),
-    rgba(255, 215, 0, 0.3),
-    transparent
-  );
-  border-radius: 2px;
-  transform-origin: 50% 55px;
-  animation: ray-pulse 3s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.honeycomb-grid {
+  display: flex;
+  flex-direction: column;
+  gap: -2px;
+}
+
+.honeycomb-row {
+  display: flex;
+  gap: 2px;
+
+  &.offset {
+    margin-left: 15px;
+  }
+}
+
+.honeycomb-cell {
+  width: 30px;
+  height: 26px;
+  background: rgba(255, 193, 7, 0.3);
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  border: 1px solid rgba(255, 193, 7, 0.5);
 }
 
 @keyframes sun-glow {

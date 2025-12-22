@@ -3,7 +3,6 @@ import { ref, onMounted, watch, computed } from "vue";
 import { BackgroundLayer } from "./components/BackgroundLayer";
 import { ProfileCard } from "./components/ProfileCard";
 import { NavGrid } from "./components/NavGrid";
-import { FooterInfo } from "./components/FooterInfo";
 import { SettingsMenu } from "./components/SettingsMenu";
 import { useLocaleStore } from "./store/locale";
 import { useThemeStore } from "./store/theme";
@@ -263,9 +262,8 @@ onMounted(() => {
     font-size: 1.2rem;
     letter-spacing: 1px;
   }
-  .top-bar{
+  .top-bar {
     margin-bottom: 0.5rem;
-    
   }
 }
 

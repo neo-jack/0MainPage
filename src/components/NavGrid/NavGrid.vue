@@ -145,12 +145,10 @@ onMounted(() => {
 
   &.online {
     background-color: #00ff00;
-    box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
   }
 
   &.offline {
     background-color: #ff0000;
-    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
   }
 }
 
@@ -201,7 +199,7 @@ onMounted(() => {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--item-color);
+    background: var(--tag-dot-bg);
   }
 
   &.highlight::before {
