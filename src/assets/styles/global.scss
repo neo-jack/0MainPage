@@ -113,17 +113,4 @@ a {
   }
 }
 
-// 滚动条
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
+ 

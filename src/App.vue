@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from "vue";
-import { BackgroundLayer } from "./components/BackgroundLayer";
-import { ProfileCard } from "./components/ProfileCard";
-import { NavGrid } from "./components/NavGrid";
-import { SettingsMenu } from "./components/SettingsMenu";
+import BackgroundLayer from "./components/BackgroundLayer/BackgroundLayer.vue";
+import ProfileCard from "./components/ProfileCard/ProfileCard.vue";
+import NavGrid from "./components/NavGrid/NavGrid.vue";
+import SettingsMenu from "./components/SettingsMenu/SettingsMenu.vue";
 import { useLocaleStore } from "./store/locale";
 import { useThemeStore } from "./store/theme";
 import { zh, en } from "./i18n";
