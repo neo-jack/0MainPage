@@ -39,7 +39,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="app-container" :class="{ 'dark-mode': themeStore.darkMode }">
+  <div
+    class="app-container"
+    :class="{
+      'dark-mode': themeStore.darkMode,
+      'light-mode': !themeStore.darkMode,
+    }"
+  >
     <!-- 背景层 -->
     <BackgroundLayer />
 
@@ -127,7 +133,7 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 21px;
   background: rgba(80, 80, 80, 0.85);
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -147,7 +153,7 @@ onMounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   background: rgba(80, 80, 80, 0.85);
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s;

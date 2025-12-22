@@ -5,13 +5,13 @@ export const useThemeStore = defineStore("theme", () => {
   // 状态
   const darkMode = ref(true);
   const autoTheme = ref(false);
-  const manualTheme = ref("#4a9eff");
+  const manualTheme = ref("#9FB3DF");
 
   // 计算属性 - 当前主题色
   const themeColor = computed(() => {
     if (autoTheme.value) {
       // 自动主题模式下，根据时间或其他逻辑返回主题色
-      return darkMode.value ? "#4a9eff" : "#939ca3";
+      return darkMode.value ? "#9FB3DF" : "#9EC6F3";
     }
     return manualTheme.value;
   });
@@ -50,7 +50,7 @@ export const useThemeStore = defineStore("theme", () => {
 
     darkMode.value = savedDarkMode !== "false";
     autoTheme.value = savedAutoTheme === "true";
-    manualTheme.value = savedManualTheme || "#4a9eff";
+    manualTheme.value = savedManualTheme || "#9FB3DF";
 
     updateCSSVariables();
   };

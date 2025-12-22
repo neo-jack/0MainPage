@@ -171,8 +171,8 @@ onMounted(() => {
 .project-name {
   font-size: 1rem;
   font-weight: 600;
+  color: var(--text-light);
 }
-
 .description {
   font-size: 0.85rem;
   color: var(--text-muted);

@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { Github } from "@icon-park/vue-next";
 import { useLocaleStore } from "../../store/locale";
+import { useThemeStore } from "../../store/theme";
 import { zh, en } from "../../i18n";
 import { computed } from "vue";
 
 const localeStore = useLocaleStore();
+const themeStore = useThemeStore();
 const t = computed(() => (localeStore.locale === "zh" ? zh : en));
+const iconColor = computed(() =>
+  themeStore.darkMode ? "#fff" : "rgba(0, 0, 0, 0.8)"
+);
 
 // 个人信息配置
 const profile = {
@@ -36,7 +41,7 @@ const profile = {
         class="social-link"
         title="GitHub"
       >
-        <Github theme="filled" size="24" fill="#fff" />
+        <Github theme="filled" size="24" :fill="iconColor" />
       </a>
       <span class="author-name">@蓝斌铨</span>
     </div>
@@ -71,10 +76,7 @@ const profile = {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-light);
 }
 
 .description {
@@ -95,8 +97,8 @@ const profile = {
 .author-name {
   position: absolute;
   right: 0;
-  font-size: 0.75rem; /* 小字 */
-  color: rgba(255, 255, 255, 0.6); /* 淡色显示 */
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
 .social-link {

@@ -13,10 +13,10 @@ const backgroundStyle = computed(() => {
         "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%)",
     };
   } else {
-    // 白天背景：浅色渐变
+    // 白天背景：蓝天白云到土地渐变
     return {
       background:
-        "linear-gradient(135deg, #e8f4f8 0%, #d4e8ed 50%, #c9dfe6 100%)",
+        "linear-gradient(180deg, #9EC6F3 0%, #BDDDE4 40%, #FFF1D5 100%)",
     };
   }
 });

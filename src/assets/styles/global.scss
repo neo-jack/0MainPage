@@ -3,26 +3,27 @@
 
 // CSS 变量 - 暗黑模式（默认）
 :root {
-  --primary-color: #4a9eff;
+  --primary-color: #9FB3DF;
   --text-light: rgba(255, 255, 255, 0.9);
   --text-muted: rgba(255, 255, 255, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.15);
+  --card-bg: rgba(159, 179, 223, 0.15);
   --card-bg-solid: rgba(68, 63, 63, 0.9);
-  --border-light: rgba(255, 255, 255, 0.2);
+  --border-light: rgba(159, 179, 223, 0.3);
   --glass-blur: 12px;
   --bg-color: #1a1a1a;
   --bg-overlay: rgba(0, 0, 0, 0.3);
 }
 
 // CSS 变量 - 亮色模式
-:root.light-mode {
-  --text-light: rgba(0, 0, 0, 0.348);
-  --text-muted: rgba(0, 0, 0, 0.351);
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-bg-solid: rgba(240, 240, 240, 0.9);
-  --border-light: rgba(0, 0, 0, 0.1);
-  --bg-color: #f5f5f5;
-  --bg-overlay: rgba(255, 255, 255, 0.2);
+.light-mode  {
+  --primary-color: #9EC6F3;
+  --text-light: rgba(0, 0, 0, 0.8);
+  --text-muted: rgba(0, 0, 0, 0.6);
+  --card-bg: rgba(189, 221, 228, 0.8);
+  --card-bg-solid: #BDDDE4;
+  --border-light: rgba(159, 179, 223, 0.5);
+  --bg-color: #9EC6F3;
+  --bg-overlay: rgba(189, 221, 228, 0.3);
 }
 
 // 重置样式
@@ -80,27 +81,6 @@ a {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-
-// 天气主题样式
-.sunny {
-  --overlay-color: rgba(255, 200, 100, 0.1);
-  --theme-color: #939ca3;
-}
-
-.cloudy {
-  --overlay-color: rgba(150, 150, 150, 0.15);
-  --theme-color: #8e8e93;
-}
-
-.rainy {
-  --overlay-color: rgba(100, 150, 200, 0.2);
-  --theme-color: #5ac8fa;
-}
-
-.snowy {
-  --overlay-color: rgba(200, 220, 255, 0.15);
-  --theme-color: #e5e5ea;
 }
 
 // 动画
