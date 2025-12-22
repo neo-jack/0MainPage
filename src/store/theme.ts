@@ -11,7 +11,7 @@ export const useThemeStore = defineStore("theme", () => {
   const themeColor = computed(() => {
     if (autoTheme.value) {
       // 自动主题模式下，根据时间或其他逻辑返回主题色
-      return darkMode.value ? "#4a9eff" : "#ff9500";
+      return darkMode.value ? "#4a9eff" : "#939ca3";
     }
     return manualTheme.value;
   });

@@ -260,6 +260,21 @@ onUnmounted(() => {
         }"
       ></div>
     </div>
+
+    <!-- 太阳元素 - 仅在亮色模式显示 -->
+    <div v-if="!themeStore.darkMode" class="sun-layer">
+      <div class="sun">
+        <div class="sun-core"></div>
+        <div class="sun-rays">
+          <div
+            v-for="i in 12"
+            :key="'ray-' + i"
+            class="sun-ray"
+            :style="{ transform: `rotate(${i * 30}deg)` }"
+          ></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -504,6 +519,95 @@ onUnmounted(() => {
   50% {
     transform: rotate(calc(var(--leaf-rotate, 0deg) + 8deg))
       scale(var(--leaf-scale, 1)) translateX(5px);
+  }
+}
+
+// 太阳层
+.sun-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sun {
+  position: absolute;
+  top: 15%;
+  right: 20%;
+  width: 80px;
+  height: 80px;
+  animation: sun-glow 4s ease-in-out infinite;
+}
+
+.sun-core {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    #ffd700 0%,
+    #ffed4e 30%,
+    #ffc107 60%,
+    rgba(255, 215, 0, 0.8) 100%
+  );
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.4),
+    0 0 60px rgba(255, 215, 0, 0.2);
+}
+
+.sun-rays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: sun-rotate 20s linear infinite;
+}
+
+.sun-ray {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  width: 3px;
+  height: 25px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 215, 0, 0.8),
+    rgba(255, 215, 0, 0.3),
+    transparent
+  );
+  border-radius: 2px;
+  transform-origin: 50% 55px;
+  animation: ray-pulse 3s ease-in-out infinite;
+}
+
+@keyframes sun-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes sun-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ray-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.2);
   }
 }
 </style>
