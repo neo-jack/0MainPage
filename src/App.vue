@@ -90,9 +90,6 @@ onMounted(() => {
             <NavGrid />
           </section>
         </div>
-
-        <!-- 底部版权 -->
-        <FooterInfo />
       </main>
     </Transition>
   </div>
@@ -244,7 +241,8 @@ onMounted(() => {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-    padding: 5rem 1rem 2rem 1rem;
+    gap: 0.2rem;
+    padding: 5rem 1rem 0rem 1rem;
     height: 100vh;
     margin: 0 auto;
   }
@@ -259,6 +257,15 @@ onMounted(() => {
     min-height: 100px;
     /* 移除 max-height: 500px; 让 flex 比例生效 */
     max-height: 2000px;
+  }
+
+  .nav-title {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+  }
+  .top-bar{
+    margin-bottom: 0.5rem;
+    
   }
 }
 

@@ -27,23 +27,26 @@ const profile = {
       <img :src="profile.avatar" :alt="profile.name" class="avatar" />
     </div>
 
-    <!-- 名称 -->
-    <h1 class="name">{{ profile.name }}</h1>
+    <!-- 信息内容 -->
+    <div class="info-content">
+      <!-- 名称 -->
+      <h1 class="name">{{ profile.name }}</h1>
 
-    <!-- 描述 -->
-    <p class="description">{{ t.profile.description }}</p>
+      <!-- 描述 -->
+      <p class="description">{{ t.profile.description }}</p>
 
-    <!-- 社交链接 -->
-    <div class="social-links">
-      <a
-        :href="profile.github"
-        target="_blank"
-        class="social-link"
-        title="GitHub"
-      >
-        <Github theme="filled" size="24" :fill="iconColor" />
-      </a>
-      <span class="author-name">@蓝斌铨</span>
+      <!-- 社交链接 -->
+      <div class="social-links">
+        <a
+          :href="profile.github"
+          target="_blank"
+          class="social-link"
+          title="GitHub"
+        >
+          <Github theme="filled" size="24" :fill="iconColor" />
+        </a>
+        <span class="author-name">@蓝斌铨</span>
+      </div>
     </div>
   </div>
 </template>
@@ -120,65 +123,51 @@ const profile = {
   }
 }
 
-// 响应式适配
+// 响应式适配 - 移动端左右布局
 @media (max-width: 768px) {
   .profile-card {
-    padding: 1.5rem 1rem;
-  }
-
-  .avatar {
-    width: 80px;
-    height: 80px;
-    border-width: 2px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 1rem;
+    min-height: auto;
+    position: relative;
   }
 
   .avatar-wrapper {
-    margin-bottom: 1rem;
-  }
-
-  .name {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    padding: 0 0.5rem;
-  }
-
-  .social-links {
-    gap: 0.8rem;
-  }
-
-  .social-link {
-    width: 40px;
-    height: 40px;
-  }
-
-  .author-name {
-    font-size: 0.7rem;
-    right: -0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-card {
-    padding: 1rem 0.8rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
   }
 
   .avatar {
     width: 70px;
     height: 70px;
+    border-width: 2px;
+  }
+
+  .info-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .name {
     font-size: 1.3rem;
+    margin-bottom: 0;
   }
 
   .description {
     font-size: 0.85rem;
-    line-height: 1.5;
+    margin-bottom: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+
+  .social-links {
+    gap: 0.8rem;
+    justify-content: flex-start;
   }
 
   .social-link {
@@ -188,14 +177,43 @@ const profile = {
 
   .author-name {
     font-size: 0.65rem;
-    position: static;
-    margin-top: 0.5rem;
-    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 0.8rem;
+    gap: 0.8rem;
   }
 
-  .social-links {
-    flex-direction: column;
-    gap: 0.5rem;
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .info-content {
+    gap: 0.4rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .social-link {
+    width: 32px;
+    height: 32px;
+  }
+
+  .author-name {
+    font-size: 0.6rem;
   }
 }
 </style>
