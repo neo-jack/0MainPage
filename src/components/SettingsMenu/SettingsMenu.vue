@@ -61,6 +61,14 @@ onUnmounted(() => {
       >
         网站风格参考链接
       </a>
+      <a
+        class="menu-item link"
+        href="https://colorhunt.co/palette/9fb3df9ec6f3bddde4fff1d5"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        晴天颜色参考链接
+      </a>
     </div>
   </div>
 </template>
@@ -80,13 +88,26 @@ onUnmounted(() => {
   color: var(--text-light);
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.3s;
+  // transition: all 0.3s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  &:hover {
-    opacity: 0.8;
+  // &:hover {
+  //   opacity: 0.8;
+  // }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:focus-visible {
+    outline: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    border-color: var(--border-light) !important;
+    background: var(--card-bg-solid) !important;
+    color: var(--text-light) !important;
+    box-shadow: none !important;
   }
 }
 
@@ -135,14 +156,28 @@ onUnmounted(() => {
   color: var(--text-light);
   font-size: 0.85rem;
   cursor: pointer;
-  transition: all 0.25s;
+  // transition: all 0.25s;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
-  &:hover {
-    border-color: var(--border-light);
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px);
+  // &:hover {
+  //   border-color: var(--border-light);
+  //   background: rgba(255, 255, 255, 0.1);
+  //   transform: translateY(-1px);
+  // }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:focus-visible,
+  &:visited {
+    outline: none !important;
+    border-color: transparent !important;
+    background: rgba(9, 118, 124, 0.14) !important;
+    color: var(--text-light) !important;
+    transform: none !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
   }
 
   &.danger {
