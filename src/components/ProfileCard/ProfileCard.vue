@@ -54,6 +54,8 @@ const profile = {
   text-align: center;
   color: var(--text-light);
   animation: fade-in 0.6s ease forwards;
+  min-height: auto;
+  height: auto;
 }
 
 .avatar-wrapper {
@@ -115,6 +117,85 @@ const profile = {
   &:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+  }
+}
+
+// 响应式适配
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-width: 2px;
+  }
+
+  .avatar-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .social-links {
+    gap: 0.8rem;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+  }
+
+  .author-name {
+    font-size: 0.7rem;
+    right: -0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 1rem 0.8rem;
+  }
+
+  .avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .name {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+  }
+
+  .author-name {
+    font-size: 0.65rem;
+    position: static;
+    margin-top: 0.5rem;
+    display: block;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
 </style>

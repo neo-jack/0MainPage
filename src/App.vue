@@ -244,10 +244,9 @@ onMounted(() => {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-
     padding: 5rem 1rem 2rem 1rem;
-    height: 100vh; /* 设置为全屏高度 */
-    margin: 0 auto; /* 移除上下边距 */
+    height: 100vh;
+    margin: 0 auto;
   }
 
   .left-section {
@@ -256,9 +255,10 @@ onMounted(() => {
 
   .right-section {
     width: 100%;
-    max-height: 500px;
-    flex: 1; /* 让right-section占据剩余空间 */
+    flex: 3 3 auto; /* 占 2 份高度 */
     min-height: 100px;
+    /* 移除 max-height: 500px; 让 flex 比例生效 */
+    max-height: 2000px;
   }
 }
 
