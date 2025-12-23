@@ -1,3 +1,39 @@
+<template>
+  <div ref="rootRef" class="settings">
+    <button
+      class="settings-btn"
+      type="button"
+      title="菜单/设置"
+      @click.stop="toggle"
+    >
+      <span class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </button>
+
+    <div v-if="open" class="menu glass-card" @click.stop>
+      <a
+        class="menu-item link"
+        href="https://java2ai.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        网站风格参考链接
+      </a>
+      <a
+        class="menu-item link"
+        href="https://colorhunt.co/palette/9fb3df9ec6f3bddde4fff1d5"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        晴天颜色参考链接
+      </a>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 
@@ -36,42 +72,6 @@ onUnmounted(() => {
   document.removeEventListener("click", handleDocumentClick);
 });
 </script>
-
-<template>
-  <div ref="rootRef" class="settings">
-    <button
-      class="settings-btn"
-      type="button"
-      title="菜单/设置"
-      @click.stop="toggle"
-    >
-      <span class="hamburger-icon">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-    </button>
-
-    <div v-if="open" class="menu glass-card" @click.stop>
-      <a
-        class="menu-item link"
-        href="https://java2ai.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        网站风格参考链接
-      </a>
-      <a
-        class="menu-item link"
-        href="https://colorhunt.co/palette/9fb3df9ec6f3bddde4fff1d5"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        晴天颜色参考链接
-      </a>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .settings {

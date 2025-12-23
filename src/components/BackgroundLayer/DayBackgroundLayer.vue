@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { computed } from "vue";
-
-// 晴天背景样式
-const dayBackgroundStyle = computed(() => ({
-  background: "linear-gradient(180deg, #9EC6F3 0%, #BDDDE4 40%, #FFF1D5 100%)",
-}));
-</script>
-
 <template>
   <div class="day-background" :style="dayBackgroundStyle">
     <!-- 太阳元素 -->
@@ -35,6 +26,15 @@ const dayBackgroundStyle = computed(() => ({
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed } from "vue";
+
+// 晴天背景样式
+const dayBackgroundStyle = computed(() => ({
+  background: "linear-gradient(180deg, #9EC6F3 0%, #BDDDE4 40%, #FFF1D5 100%)",
+}));
+</script>
 
 <style lang="scss" scoped>
 .day-background {

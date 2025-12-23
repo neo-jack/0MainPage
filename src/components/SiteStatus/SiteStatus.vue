@@ -1,3 +1,25 @@
+<template>
+  <div class="site-status">
+    <div class="status-header">
+      <span class="label">{{ t.siteStatus.title }}</span>
+      <button class="refresh-btn" @click="refresh" title="刷新">
+        <span>↻</span>
+      </button>
+    </div>
+    <div class="status-list">
+      <div
+        v-for="site in sites"
+        :key="site.id"
+        class="status-item"
+        :title="site.url"
+      >
+        <span class="dot" :class="site.status"></span>
+        <span class="site-name">{{ site.name }}</span>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import {
@@ -42,28 +64,6 @@ const refresh = () => {
   checkAllSites();
 };
 </script>
-
-<template>
-  <div class="site-status">
-    <div class="status-header">
-      <span class="label">{{ t.siteStatus.title }}</span>
-      <button class="refresh-btn" @click="refresh" title="刷新">
-        <span>↻</span>
-      </button>
-    </div>
-    <div class="status-list">
-      <div
-        v-for="site in sites"
-        :key="site.id"
-        class="status-item"
-        :title="site.url"
-      >
-        <span class="dot" :class="site.status"></span>
-        <span class="site-name">{{ site.name }}</span>
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .site-status {

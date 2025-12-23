@@ -1,3 +1,27 @@
+<template>
+  <div class="theme-switch">
+    <button
+      class="auto-btn"
+      :class="{ active: themeStore.autoTheme }"
+      @click="themeStore.toggleAutoTheme"
+      title="自动主题"
+    >
+      自动
+    </button>
+    <div v-if="!themeStore.autoTheme" class="color-picker">
+      <button
+        v-for="theme in themeColors"
+        :key="theme.color"
+        class="color-btn"
+        :style="{ backgroundColor: theme.color }"
+        :class="{ active: themeStore.manualTheme === theme.color }"
+        :title="theme.name"
+        @click="selectColor(theme.color)"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { useThemeStore } from "../../store/theme";
 
@@ -22,30 +46,6 @@ const selectColor = (color: string) => {
 //   themeStore.toggleAutoTheme();
 // };
 </script>
-
-<template>
-  <div class="theme-switch">
-    <button
-      class="auto-btn"
-      :class="{ active: themeStore.autoTheme }"
-      @click="themeStore.toggleAutoTheme"
-      title="自动主题"
-    >
-      自动
-    </button>
-    <div v-if="!themeStore.autoTheme" class="color-picker">
-      <button
-        v-for="theme in themeColors"
-        :key="theme.color"
-        class="color-btn"
-        :style="{ backgroundColor: theme.color }"
-        :class="{ active: themeStore.manualTheme === theme.color }"
-        :title="theme.name"
-        @click="selectColor(theme.color)"
-      />
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .theme-switch {

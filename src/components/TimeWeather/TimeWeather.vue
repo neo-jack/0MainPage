@@ -1,3 +1,18 @@
+<template>
+  <div class="time-weather glass-card">
+    <!-- 时间 -->
+    <div class="time-section">
+      <div class="time">{{ currentTime }}</div>
+      <div class="date">{{ currentDate }}</div>
+    </div>
+
+    <!-- 站点检测 -->
+    <div class="status-section">
+      <SiteStatus />
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
 import { SiteStatus } from "../SiteStatus";
@@ -37,21 +52,6 @@ onUnmounted(() => {
   clearInterval(timer);
 });
 </script>
-
-<template>
-  <div class="time-weather glass-card">
-    <!-- 时间 -->
-    <div class="time-section">
-      <div class="time">{{ currentTime }}</div>
-      <div class="date">{{ currentDate }}</div>
-    </div>
-
-    <!-- 站点检测 -->
-    <div class="status-section">
-      <SiteStatus />
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .time-weather {

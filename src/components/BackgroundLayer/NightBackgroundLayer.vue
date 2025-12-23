@@ -1,3 +1,101 @@
+<template>
+  <div class="night-background" :style="nightBackgroundStyle">
+    <!-- 成对星点层 -->
+    <div class="star-pairs-layer">
+      <div
+        v-for="pair in starPairs"
+        :key="'pair-' + pair.id"
+        class="star-pair"
+        :style="{
+          left: pair.x + '%',
+          top: pair.y + '%',
+          animationDelay: pair.moveDelay + 's',
+          animationDuration: pair.moveDuration + 's',
+        }"
+      >
+        <!-- 星点1 -->
+        <div
+          class="star"
+          :style="{
+            left: pair.star1.offsetX + 'px',
+            top: pair.star1.offsetY + 'px',
+            width: pair.star1.size + 'px',
+            height: pair.star1.size + 'px',
+          }"
+        ></div>
+        <!-- 星点2 -->
+        <div
+          class="star"
+          :style="{
+            left: pair.star2.offsetX + 'px',
+            top: pair.star2.offsetY + 'px',
+            width: pair.star2.size + 'px',
+            height: pair.star2.size + 'px',
+          }"
+        ></div>
+        <!-- 虚线连接 -->
+        <svg class="pair-line">
+          <line
+            :x1="pair.star1.offsetX + pair.star1.size / 2"
+            :y1="pair.star1.offsetY + pair.star1.size / 2"
+            :x2="pair.star2.offsetX + pair.star2.size / 2"
+            :y2="pair.star2.offsetY + pair.star2.size / 2"
+            class="connection-line"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- 移动云朵 -->
+    <div class="clouds-layer">
+      <div
+        v-for="cloud in clouds"
+        :key="'cloud-' + cloud.id"
+        class="cloud"
+        :style="{
+          top: cloud.top + '%',
+          width: cloud.size + 'px',
+          height: cloud.size * 0.6 + 'px',
+          animationDuration: cloud.duration + 's',
+          animationDelay: cloud.delay + 's',
+          opacity: cloud.opacity,
+        }"
+      ></div>
+    </div>
+
+    <!-- 流星（随机位置） -->
+    <template v-for="meteor in meteors" :key="'meteor-' + meteor.id">
+      <div
+        class="meteor"
+        :style="{
+          top: meteor.top + '%',
+          right: meteor.right + '%',
+          animationDuration: meteor.duration + 's',
+        }"
+      >
+        <div class="meteor-head"></div>
+        <div class="meteor-tail"></div>
+      </div>
+    </template>
+
+    <!-- 叶片装饰（左右两侧分布） -->
+    <div class="leaves-layer">
+      <div
+        v-for="leaf in leaves"
+        :key="'leaf-' + leaf.id"
+        class="leaf"
+        :style="{
+          [leaf.side]: leaf.offset + 'px',
+          top: leaf.top + '%',
+          transform: 'rotate(' + leaf.rotate + 'deg) scale(' + leaf.size + ')',
+          animationDelay: leaf.delay + 's',
+          animationDuration: leaf.duration + 's',
+        }"
+      ></div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
 
@@ -147,104 +245,6 @@ onUnmounted(() => {
   }
 });
 </script>
-
-<template>
-  <div class="night-background" :style="nightBackgroundStyle">
-    <!-- 成对星点层 -->
-    <div class="star-pairs-layer">
-      <div
-        v-for="pair in starPairs"
-        :key="'pair-' + pair.id"
-        class="star-pair"
-        :style="{
-          left: pair.x + '%',
-          top: pair.y + '%',
-          animationDelay: pair.moveDelay + 's',
-          animationDuration: pair.moveDuration + 's',
-        }"
-      >
-        <!-- 星点1 -->
-        <div
-          class="star"
-          :style="{
-            left: pair.star1.offsetX + 'px',
-            top: pair.star1.offsetY + 'px',
-            width: pair.star1.size + 'px',
-            height: pair.star1.size + 'px',
-          }"
-        ></div>
-        <!-- 星点2 -->
-        <div
-          class="star"
-          :style="{
-            left: pair.star2.offsetX + 'px',
-            top: pair.star2.offsetY + 'px',
-            width: pair.star2.size + 'px',
-            height: pair.star2.size + 'px',
-          }"
-        ></div>
-        <!-- 虚线连接 -->
-        <svg class="pair-line">
-          <line
-            :x1="pair.star1.offsetX + pair.star1.size / 2"
-            :y1="pair.star1.offsetY + pair.star1.size / 2"
-            :x2="pair.star2.offsetX + pair.star2.size / 2"
-            :y2="pair.star2.offsetY + pair.star2.size / 2"
-            class="connection-line"
-          />
-        </svg>
-      </div>
-    </div>
-
-    <!-- 移动云朵 -->
-    <div class="clouds-layer">
-      <div
-        v-for="cloud in clouds"
-        :key="'cloud-' + cloud.id"
-        class="cloud"
-        :style="{
-          top: cloud.top + '%',
-          width: cloud.size + 'px',
-          height: cloud.size * 0.6 + 'px',
-          animationDuration: cloud.duration + 's',
-          animationDelay: cloud.delay + 's',
-          opacity: cloud.opacity,
-        }"
-      ></div>
-    </div>
-
-    <!-- 流星（随机位置） -->
-    <template v-for="meteor in meteors" :key="'meteor-' + meteor.id">
-      <div
-        class="meteor"
-        :style="{
-          top: meteor.top + '%',
-          right: meteor.right + '%',
-          animationDuration: meteor.duration + 's',
-        }"
-      >
-        <div class="meteor-head"></div>
-        <div class="meteor-tail"></div>
-      </div>
-    </template>
-
-    <!-- 叶片装饰（左右两侧分布） -->
-    <div class="leaves-layer">
-      <div
-        v-for="leaf in leaves"
-        :key="'leaf-' + leaf.id"
-        class="leaf"
-        :style="{
-          [leaf.side]: leaf.offset + 'px',
-          top: leaf.top + '%',
-          transform: 'rotate(' + leaf.rotate + 'deg) scale(' + leaf.size + ')',
-          animationDelay: leaf.delay + 's',
-          animationDuration: leaf.duration + 's',
-        }"
-      ></div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .night-background {

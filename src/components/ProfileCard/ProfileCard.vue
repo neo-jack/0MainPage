@@ -1,25 +1,3 @@
-<script setup lang="ts">
-import { Github } from "@icon-park/vue-next";
-import { useLocaleStore } from "../../store/locale";
-import { useThemeStore } from "../../store/theme";
-import { zh, en } from "../../i18n";
-import { computed } from "vue";
-
-const localeStore = useLocaleStore();
-const themeStore = useThemeStore();
-const t = computed(() => (localeStore.locale === "zh" ? zh : en));
-const iconColor = computed(() =>
-  themeStore.darkMode ? "#fff" : "rgba(0, 0, 0, 0.8)"
-);
-
-// 个人信息配置
-const profile = {
-  avatar: "/avatar.png", // 替换为你的头像
-  name: "Laaaanbq",
-  github: "https://github.com/neo-jack",
-};
-</script>
-
 <template>
   <div class="profile-card glass-card">
     <!-- 头像 -->
@@ -50,6 +28,28 @@ const profile = {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { Github } from "@icon-park/vue-next";
+import { useLocaleStore } from "../../store/locale";
+import { useThemeStore } from "../../store/theme";
+import { zh, en } from "../../i18n";
+import { computed } from "vue";
+
+const localeStore = useLocaleStore();
+const themeStore = useThemeStore();
+const t = computed(() => (localeStore.locale === "zh" ? zh : en));
+const iconColor = computed(() =>
+  themeStore.darkMode ? "#fff" : "rgba(0, 0, 0, 0.8)"
+);
+
+// 个人信息配置
+const profile = {
+  avatar: "/avatar.png", // 替换为你的头像
+  name: "Laaaanbq",
+  github: "https://github.com/neo-jack",
+};
+</script>
 
 <style lang="scss" scoped>
 .profile-card {
