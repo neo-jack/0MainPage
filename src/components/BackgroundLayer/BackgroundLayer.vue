@@ -1,3 +1,4 @@
+//TODO: 恐龙快跑模块
 <template>
   <component
     :is="themeStore.darkMode ? NightBackgroundLayer : DayBackgroundLayer"
