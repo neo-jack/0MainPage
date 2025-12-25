@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { SiteStatus } from "../SiteStatus";
+import SiteStatus from "../SiteStatus/SiteStatus.vue";
 import { useLocaleStore } from "../../store/locale";
 
 const localeStore = useLocaleStore();
