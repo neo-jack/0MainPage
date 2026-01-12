@@ -33,8 +33,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ github.repository_owner }}/0mainpage:${{ steps.extract_tag.outputs.TAG }}
-            ghcr.io/${{ github.repository_owner }}/0mainpage:latest
+            ghcr.io/${{ github.repository }}:${{ steps.extract_tag.outputs.TAG }}
+            ghcr.io/${{ github.repository }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
-            docker pull ghcr.io/${{ github.repository_owner }}/0mainpage:latest
+            docker pull ghcr.io/${{ github.repository }}:latest
             docker stop mainpage-nginx || true
             docker rm mainpage-nginx || true
-            docker run -d --name mainpage-nginx -p 80:80 ghcr.io/${{ github.repository_owner }}/0mainpage:latest
+            docker run -d --name mainpage-nginx -p 80:80 ghcr.io/${{ github.repository }}:latest
