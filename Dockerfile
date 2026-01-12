@@ -14,10 +14,15 @@ RUN pnpm install
 # 复制源代码
 COPY . .
 
-# 构建应用（跳过 TypeScript 检查）
-RUN echo "开始构建..." && \
-    echo "使用快速构建脚本..." && \
-    pnpm run build:fast
+# 构建应用（详细调试）
+RUN echo "=== 开始构建调试 ===" && \
+    echo "当前目录:" && pwd && \
+    echo "文件列表:" && ls -la && \
+    echo "检查 package.json:" && cat package.json && \
+    echo "检查 node_modules:" && ls -la node_modules/ | head -10 && \
+    echo "检查 pnpm 版本:" && pnpm --version && \
+    echo "尝试运行 build:fast:" && \
+    pnpm run build:fast || (echo "build:fast 失败，尝试直接 vite build:" && npx vite build)
 
 # 生产阶段
 FROM nginx:stable-alpine AS production-stage
