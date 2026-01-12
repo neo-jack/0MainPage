@@ -32,7 +32,7 @@ export const navItems: NavItem[] = [
   },
   {
     id: 2,
-    name: "H02Front",
+    name: "组件重置",
     icon: "Layout",
     localUrl: "http://localhost:3002",
     prodUrl: "https://h02.example.com",
