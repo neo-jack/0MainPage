@@ -1,5 +1,5 @@
 # 构建阶段
-FROM node:18-alpine AS build-stage
+FROM node:20-alpine AS build-stage
 
 WORKDIR /app
 
