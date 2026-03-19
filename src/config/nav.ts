@@ -25,7 +25,7 @@ export const navItems: NavItem[] = [
     localUrl: "http://localhost:3001",
     prodUrl: "http://113.45.4.229:3001",
     color: "#4a9eff",
-    description: "以贷款管理系统为背景的微笑前端管理系统,实现管理系统常用功能，如头像，锁屏等",
+    description: "以贷款管理系统",
     descriptionEn: "Frontend Project 1",
     techStack: ["PC","React", "TypeScript","Nest"],
     highlights: ["响应式"],
