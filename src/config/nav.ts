@@ -77,6 +77,7 @@ export const navItems: NavItem[] = [
       { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
     ],
     localUrl: "http://localhost:3002",
+    
     prodUrl: "https://h02.example.com",
     color: "#ff9500",
     description: "前端项目二",
