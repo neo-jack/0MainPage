@@ -16,22 +16,40 @@
               offline: !siteStatus[item.id],
             }"
           ></div>
-          <span class="project-name">{{ item.name }}</span>
+          <span class="project-name">{{ getName(item) }}</span>
         </div>
-        <div class="github-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+        <div class="icon-group">
+          <a
+            v-for="navIcon in item.icons"
+            :key="navIcon.url"
+            :href="navIcon.url"
+            target="_blank"
+            class="nav-icon-link"
+            :title="navIcon.title"
+            @click.stop
+          >
+            <img
+              v-if="isImageIcon(navIcon.icon)"
+              :src="navIcon.icon"
+              :alt="navIcon.title"
+              class="custom-icon"
             />
-          </svg>
+            <component
+              v-else
+              :is="getIcon(navIcon.icon)"
+              theme="filled"
+              size="20"
+              fill="currentColor"
+            />
+          </a>
         </div>
       </div>
       <p class="description">{{ getDescription(item) }}</p>
       <div class="tags">
-        <span v-for="tech in item.techStack" :key="tech" class="tag tech">{{
+        <span v-for="tech in getTechStack(item)" :key="tech" class="tag tech">{{
           tech
         }}</span>
-        <span v-for="hl in item.highlights" :key="hl" class="tag highlight">{{
+        <span v-for="hl in getHighlights(item)" :key="hl" class="tag highlight">{{
           hl
         }}</span>
       </div>
@@ -40,9 +58,10 @@
 </template>
 
 <script setup lang="ts">
+import * as IconPark from "@icon-park/vue-next";
 import { navItems, getNavUrl, type NavItem, type NavCategory } from "../../config/nav";
 import { useLocaleStore } from "../../store/locale";
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, type Component } from "vue";
 
 const props = defineProps<{ category: NavCategory }>();
 
@@ -54,9 +73,32 @@ const filteredItems = computed(() =>
   navItems.filter((item) => item.category === props.category)
 );
 
+// 获取名称
+const getName = (item: NavItem) => {
+  return localeStore.locale === "zh" ? item.name : item.nameEn;
+};
+
 // 获取描述文字
 const getDescription = (item: NavItem) => {
   return localeStore.locale === "zh" ? item.description : item.descriptionEn;
+};
+
+// 获取技术栈
+const getTechStack = (item: NavItem) => {
+  return localeStore.locale === "zh" ? item.techStack : item.techStackEn;
+};
+
+// 获取亮点
+const getHighlights = (item: NavItem) => {
+  return localeStore.locale === "zh" ? item.highlights : item.highlightsEn;
+};
+
+// 判断是否为自定义图片路径
+const isImageIcon = (icon: string): boolean => icon.charAt(0) === "/";
+
+// 根据图标名称获取 icon-park 组件
+const getIcon = (name: string): Component => {
+  return (IconPark as Record<string, Component>)[name];
 };
 
 // 检测网站状态
@@ -159,36 +201,52 @@ onMounted(() => {
   }
 }
 
-.github-icon {
+.icon-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.nav-icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
   color: var(--text-light);
   transition: all 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+  }
 }
 
-.github-icon:hover {
-  color: var(--primary-color);
-  transform: scale(1.1);
+.custom-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .project-name {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-light);
 }
 .description {
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   line-height: 1.4;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.3rem;
   align-items: center;
 }
 

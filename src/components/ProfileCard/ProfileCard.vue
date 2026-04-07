@@ -187,7 +187,7 @@ const getIcon = (name: string): Component => {
   }
 
   .social-links {
-    gap: 0.8rem;
+    gap: 0.2rem;
     justify-content: flex-start;
   }
 

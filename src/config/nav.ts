@@ -8,18 +8,29 @@ export type NavCategory = "网站" | "工具" | "源码" | "其他";
 
 export const NAV_CATEGORIES: NavCategory[] = ["网站", "源码", "工具", "其他"];
 
+// 导航图标配置
+export interface NavIcon {
+  // icon-park 图标名称或自定义图片路径（以 / 开头）
+  icon: string;
+  url: string;
+  title: string;
+}
+
 // 导航项配置
 export interface NavItem {
   id: number;
   name: string;
-  icon: string;
+  nameEn: string;
+  icons: NavIcon[];
   localUrl: string;
   prodUrl: string;
   color: string;
   description: string;
   descriptionEn: string;
   techStack: string[];
+  techStackEn: string[];
   highlights: string[];
+  highlightsEn: string[];
   category: NavCategory;
 }
 
@@ -27,66 +38,89 @@ export const navItems: NavItem[] = [
   {
     id: 1,
     name: "手写react18核心",
-    icon: "Application",
+    nameEn: "React18 Core",
+    icons: [
+      {
+        icon: "Github",
+        url: "https://github.com/neo-jack/102my-react",
+        title: "GitHub",
+      },
+      {
+        icon: "/icon/figma.svg",
+        url: "https://www.figma.com/design/66yZgdnDIB3orW1hM58aku/102%E6%BA%90%E7%A0%81?node-id=0-1&p=f",
+        title: "Figma",
+      },
+    ],
     localUrl: "http://localhost:3001",
     prodUrl: "http://113.45.4.229:3001",
     color: "#4a9eff",
-    description: "以贷款管理系统",
-    descriptionEn: "Frontend Project 1",
-    techStack: ["PC", "React", "TypeScript", "Nest"],
-    highlights: ["响应式"],
+    description:
+      "从零实现React18核心源码，包含Fiber架构、Hooks、Reconciler、并发模式等",
+    descriptionEn:
+      "Build React18 core from scratch, including Fiber, Hooks, Reconciler, Concurrent Mode",
+    techStack: ["React", "TypeScript", "Rollup"],
+    techStackEn: ["React", "TypeScript", "Rollup"],
+    highlights: ["Fiber架构", "Hooks实现", "Reconciler", "并发模式"],
+    highlightsEn: [
+      "Fiber Architecture",
+      "Hooks",
+      "Reconciler",
+      "Concurrent Mode",
+    ],
     category: "源码",
   },
   {
     id: 2,
-    name: "",
-    icon: "Layout",
+    name: "three3D网站",
+    nameEn: "Three3D Website",
+    icons: [
+      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+    ],
     localUrl: "http://localhost:3002",
     prodUrl: "https://h02.example.com",
     color: "#ff9500",
     description: "前端项目二",
     descriptionEn: "Frontend Project 2",
     techStack: ["React", "TypeScript"],
+    techStackEn: ["React", "TypeScript-en"],
     highlights: ["高性能"],
-    category: "网站",
-  },
-  {
-    id: 3,
-    name: "H03Front",
-    icon: "DataFile",
-    localUrl: "http://localhost:3003",
-    prodUrl: "https://h03.example.com",
-    color: "#ff2d55",
-    description: "前端项目三",
-    descriptionEn: "Frontend Project 3",
-    techStack: ["Vue", "Vite"],
-    highlights: ["数据可视化"],
+    highlightsEn: ["High Performance"],
     category: "网站",
   },
   {
     id: 4,
-    name: "H04Front",
-    icon: "Server",
+    name: "其他-占位",
+    nameEn: "Others",
+    icons: [
+      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+    ],
     localUrl: "http://localhost:3004",
     prodUrl: "https://h04.example.com",
     color: "#5ac8fa",
     description: "前端项目四",
     descriptionEn: "Frontend Project 4",
     techStack: ["Next.js", "TailwindCSS"],
+    techStackEn: ["Next.js", "TailwindCSS"],
     highlights: ["SSR"],
-    category: "网站",
+    highlightsEn: ["SSR"],
+    category: "其他",
   },
   {
     id: 5,
-    name: "S01Back",
-    icon: "Database",
+    name: "工具-占位",
+    nameEn: "Tools",
+    icons: [
+      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+    ],
     localUrl: "http://localhost:4001",
     prodUrl: "https://s01.example.com",
     color: "#af52de",
     description: "后端服务",
     descriptionEn: "Backend Service",
     techStack: ["Node.js", "Express"],
+    techStackEn: ["Node.js", "Express"],
     highlights: ["RESTful API"],
+    highlightsEn: ["RESTful API"],
     category: "工具",
   },
 ];
