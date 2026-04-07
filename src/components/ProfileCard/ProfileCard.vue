@@ -16,12 +16,26 @@
       <!-- 社交链接 -->
       <div class="social-links">
         <a
-          :href="profile.github"
+          v-for="link in profile.socialLinks"
+          :key="link.url"
+          :href="link.url"
           target="_blank"
           class="social-link"
-          title="GitHub"
+          :title="link.title"
         >
-          <Github theme="filled" size="24" :fill="iconColor" />
+          <img
+            v-if="isImageIcon(link.icon)"
+            :src="link.icon"
+            :alt="link.title"
+            class="custom-icon"
+          />
+          <component
+            v-else
+            :is="getIcon(link.icon)"
+            theme="filled"
+            size="24"
+            :fill="link.color || iconColor"
+          />
         </a>
         <span class="author-name">@蓝斌铨</span>
       </div>
@@ -30,11 +44,12 @@
 </template>
 
 <script setup lang="ts">
-import { Github } from "@icon-park/vue-next";
+import * as IconPark from "@icon-park/vue-next";
 import { useLocaleStore } from "../../store/locale";
 import { useThemeStore } from "../../store/theme";
 import { zh, en } from "../../i18n";
-import { computed } from "vue";
+import { computed, type Component } from "vue";
+import { profile } from "../../config/profiles";
 
 const localeStore = useLocaleStore();
 const themeStore = useThemeStore();
@@ -43,11 +58,12 @@ const iconColor = computed(() =>
   themeStore.darkMode ? "#fff" : "rgba(0, 0, 0, 0.8)"
 );
 
-// 个人信息配置
-const profile = {
-  avatar: "/avatar.png", // 替换为你的头像
-  name: "Laaaanbq",
-  github: "https://github.com/neo-jack",
+// 判断是否为自定义图片路径
+const isImageIcon = (icon: string): boolean => icon.charAt(0) === "/";
+
+// 根据图标名称获取 icon-park 组件
+const getIcon = (name: string): Component => {
+  return (IconPark as Record<string, Component>)[name];
 };
 </script>
 
@@ -94,7 +110,7 @@ const profile = {
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.2rem;
   position: relative; /* 为绝对定位的子元素提供参考 */
   align-items: center;
 }
@@ -118,9 +134,14 @@ const profile = {
   line-height: 0;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2)
   }
+}
+
+.custom-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 // 响应式适配 - 移动端左右布局
