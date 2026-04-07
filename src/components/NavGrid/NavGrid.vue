@@ -97,7 +97,7 @@ const getHighlights = (item: NavItem) => {
 const isImageIcon = (icon: string): boolean => icon.charAt(0) === "/";
 
 // 根据图标名称获取 icon-park 组件
-const getIcon = (name: string): Component => {
+const getIcon = (name: string): Component | undefined => {
   return (IconPark as Record<string, Component>)[name];
 };
 

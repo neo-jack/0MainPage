@@ -15,7 +15,7 @@ const themeStore = useThemeStore();
 // 国际化文案
 const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 const isLoaded = ref(false);
-const activeCategory = ref<NavCategory>(NAV_CATEGORIES[0]);
+const activeCategory = ref<NavCategory>(NAV_CATEGORIES[0]!);
 
 // 监听主题色变化
 watch(
