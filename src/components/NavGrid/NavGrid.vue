@@ -1,7 +1,7 @@
 <template>
   <div class="nav-grid">
     <div
-      v-for="item in navItems"
+      v-for="item in filteredItems"
       :key="item.id"
       class="nav-card"
       :style="{ '--item-color': item.color }"
@@ -40,12 +40,19 @@
 </template>
 
 <script setup lang="ts">
-import { navItems, getNavUrl, type NavItem } from "../../config/nav";
+import { navItems, getNavUrl, type NavItem, type NavCategory } from "../../config/nav";
 import { useLocaleStore } from "../../store/locale";
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
+
+const props = defineProps<{ category: NavCategory }>();
 
 const localeStore = useLocaleStore();
 const siteStatus = ref<Record<string, boolean>>({});
+
+// 按分类过滤导航项
+const filteredItems = computed(() =>
+  navItems.filter((item) => item.category === props.category)
+);
 
 // 获取描述文字
 const getDescription = (item: NavItem) => {

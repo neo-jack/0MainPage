@@ -3,6 +3,11 @@
 // 环境判断
 const isDev = import.meta.env.DEV;
 
+// 导航分类
+export type NavCategory = "网站" | "工具" | "源码" | "其他";
+
+export const NAV_CATEGORIES: NavCategory[] = ["网站", "源码", "工具", "其他"];
+
 // 导航项配置
 export interface NavItem {
   id: number;
@@ -15,24 +20,26 @@ export interface NavItem {
   descriptionEn: string;
   techStack: string[];
   highlights: string[];
+  category: NavCategory;
 }
 
 export const navItems: NavItem[] = [
   {
     id: 1,
-    name: "LoanMangement",
+    name: "手写react18核心",
     icon: "Application",
     localUrl: "http://localhost:3001",
     prodUrl: "http://113.45.4.229:3001",
     color: "#4a9eff",
     description: "以贷款管理系统",
     descriptionEn: "Frontend Project 1",
-    techStack: ["PC","React", "TypeScript","Nest"],
+    techStack: ["PC", "React", "TypeScript", "Nest"],
     highlights: ["响应式"],
+    category: "源码",
   },
   {
     id: 2,
-    name: "组件重置",
+    name: "",
     icon: "Layout",
     localUrl: "http://localhost:3002",
     prodUrl: "https://h02.example.com",
@@ -41,6 +48,7 @@ export const navItems: NavItem[] = [
     descriptionEn: "Frontend Project 2",
     techStack: ["React", "TypeScript"],
     highlights: ["高性能"],
+    category: "网站",
   },
   {
     id: 3,
@@ -53,6 +61,7 @@ export const navItems: NavItem[] = [
     descriptionEn: "Frontend Project 3",
     techStack: ["Vue", "Vite"],
     highlights: ["数据可视化"],
+    category: "网站",
   },
   {
     id: 4,
@@ -65,6 +74,7 @@ export const navItems: NavItem[] = [
     descriptionEn: "Frontend Project 4",
     techStack: ["Next.js", "TailwindCSS"],
     highlights: ["SSR"],
+    category: "网站",
   },
   {
     id: 5,
@@ -77,6 +87,7 @@ export const navItems: NavItem[] = [
     descriptionEn: "Backend Service",
     techStack: ["Node.js", "Express"],
     highlights: ["RESTful API"],
+    category: "工具",
   },
 ];
 

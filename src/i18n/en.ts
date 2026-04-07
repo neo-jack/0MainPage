@@ -50,6 +50,13 @@ export default {
   },
   // 导航栏标题
   navTitle: {
-    text: "o--- Navigation --- o",
+    text: "Portfolio",
+  },
+  // 导航分类
+  navCategory: {
+    网站: "Website",
+    工具: "Tools",
+    源码: "Source",
+    其他: "Other",
   },
 };

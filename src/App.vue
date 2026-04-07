@@ -7,6 +7,7 @@ import SettingsMenu from "./components/SettingsMenu/SettingsMenu.vue";
 import { useLocaleStore } from "./store/locale";
 import { useThemeStore } from "./store/theme";
 import { zh, en } from "./i18n";
+import { NAV_CATEGORIES, type NavCategory } from "./config/nav";
 
 const localeStore = useLocaleStore();
 const themeStore = useThemeStore();
@@ -14,6 +15,7 @@ const themeStore = useThemeStore();
 // 国际化文案
 const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 const isLoaded = ref(false);
+const activeCategory = ref<NavCategory>(NAV_CATEGORIES[0]);
 
 // 监听主题色变化
 watch(
@@ -83,10 +85,20 @@ onMounted(() => {
           <section class="right-section">
             <!-- 功能区顶部 -->
             <div class="top-bar">
-              <div class="nav-title">{{ t.navTitle.text }}</div>
+              <div class="nav-tabs">
+                <button
+                  v-for="cat in NAV_CATEGORIES"
+                  :key="cat"
+                  class="tab-btn"
+                  :class="{ active: activeCategory === cat }"
+                  @click="activeCategory = cat"
+                >
+                  {{ t.navCategory[cat] }}
+                </button>
+              </div>
             </div>
             <!-- 导航网格 -->
-            <NavGrid />
+            <NavGrid :category="activeCategory" />
           </section>
         </div>
       </main>
@@ -167,22 +179,22 @@ onMounted(() => {
 }
 
 .content-wrapper {
-  flex: 1;
+  flex: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   max-width: 1200px;
-  margin: 4em auto 20px auto;
+  margin: auto;
   width: 100%;
-  min-height: 0; /* 允许flex子项收缩 */
   overflow: hidden; /* 防止溢出 */
 }
 
 .left-section {
   flex: 0 0 auto;
   width: 380px;
+   max-height: 340px;
 }
 
 .right-section {
@@ -191,23 +203,22 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0;
-  max-height: 380px;
+  max-height: 340px;
 }
 
 .top-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 1rem;
+   margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .nav-title {
-  width: 100%;
-  text-align: center;
-  font-size: 1.5rem;
+  flex-shrink: 0;
+  font-size: 1.25rem;
   font-weight: bold;
   font-family: "Arial Black", "Microsoft YaHei", sans-serif;
   background-image: linear-gradient(
@@ -223,7 +234,36 @@ onMounted(() => {
   background-size: 200% 200%;
   animation: gradientShift 3s ease-in-out infinite;
   letter-spacing: 2px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--card-bg-solid);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.tab-btn {
+  padding: 0.3rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--text-light);
+  }
+
+  &.active {
+    background: var(--primary-color, #4a9eff);
+    color: #fff;
+  }
 }
 
 @keyframes gradientShift {
@@ -240,7 +280,8 @@ onMounted(() => {
 @media (max-width: 768px) {
   .content-wrapper {
     flex-direction: column;
-    gap: 0.2rem;
+    align-items: center;
+    gap: 0rem;
     padding: 5rem 1rem 0rem 1rem;
     height: 100vh;
     margin: 0 auto;
@@ -259,11 +300,17 @@ onMounted(() => {
   }
 
   .nav-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
     letter-spacing: 1px;
   }
+
   .top-bar {
     margin-bottom: 0.5rem;
+  }
+
+  .tab-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
   }
 }
 
