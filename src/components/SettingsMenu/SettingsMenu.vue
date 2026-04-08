@@ -22,15 +22,22 @@
   target="_blank"
   rel="noopener noreferrer"
 >
-  {{ item.label }}
+  {{ getLabel(item) }}
 </a>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref,  onMounted, onUnmounted } from "vue";
 import { menuItems } from "../../config/menu";
+import type { MenuItem } from "../../config/menu";
+import { useLocaleStore } from "../../store/locale";
+
+const localeStore = useLocaleStore();
+
+const getLabel = (item: MenuItem) =>
+  localeStore.locale === "zh" ? item.label : item.labelEn;
+ 
 
 const open = ref(false);
 const rootRef = ref<HTMLElement | null>(null);
@@ -50,14 +57,6 @@ const handleDocumentClick = (e: MouseEvent) => {
   close();
 };
 
-// const clearCacheAndReload = () => {
-//   // 仅清理本项目用到的 key
-//   localStorage.removeItem("autoTheme");
-//   localStorage.removeItem("manualTheme");
-//   localStorage.removeItem("darkMode");
-//   close();
-//   window.location.reload();
-// };
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
