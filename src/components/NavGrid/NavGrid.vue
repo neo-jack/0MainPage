@@ -164,7 +164,7 @@ onMounted(() => {
   transition: all 0.3s;
 
   &:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.01);
   }
 
   &:active {
@@ -219,9 +219,8 @@ onMounted(() => {
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
-    color: var(--primary-color);
-    transform: scale(1.1);
+ &:hover {
+    filter: brightness(1.3);
   }
 }
 

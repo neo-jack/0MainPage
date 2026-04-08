@@ -7,6 +7,23 @@
       </div>
     </div>
 
+    <!-- 白云层 -->
+    <div class="clouds-layer">
+      <div
+        v-for="cloud in clouds"
+        :key="'cloud-' + cloud.id"
+        class="cloud"
+        :style="{
+          top: cloud.top + '%',
+          width: cloud.size + 'px',
+          height: cloud.size * 0.6 + 'px',
+          animationDuration: cloud.duration + 's',
+          animationDelay: cloud.delay + 's',
+          opacity: cloud.opacity,
+        }"
+      ></div>
+    </div>
+
     <!-- 蜂巢结构 -->
     <div class="honeycomb-layer">
       <div class="honeycomb-grid">
@@ -28,11 +45,38 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
+
+// 云朵数据
+interface Cloud {
+  id: number;
+  top: number;
+  size: number;
+  duration: number;
+  delay: number;
+  opacity: number;
+}
+const clouds = ref<Cloud[]>([]);
+
+onMounted(() => {
+  const cloudCount = 8;
+  const cloudList: Cloud[] = [];
+  for (let i = 0; i < cloudCount; i++) {
+    cloudList.push({
+      id: i,
+      top: 5 + Math.random() * 30,
+      size: 120 + Math.random() * 80,
+      duration: 50 + Math.random() * 40,
+      delay: -Math.random() * 50,
+      opacity: 0.6 + Math.random() * 0.3,
+    });
+  }
+  clouds.value = cloudList;
+});
 
 // 晴天背景样式
 const dayBackgroundStyle = computed(() => ({
-  background: "linear-gradient(180deg, #9EC6F3 0%, #BDDDE4 40%, #FFF1D5 100%)",
+  background: "linear-gradient(180deg, #9EC6F3 0%, #BDDDE4 80%, #B8E6C8  100%)",
 }));
 </script>
 
@@ -74,6 +118,35 @@ const dayBackgroundStyle = computed(() => ({
   );
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+// 白云层
+.clouds-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  left: -200px;
+  width: 100px !important;
+  height: 70px !important;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  box-shadow: 35px 8px 0 5px rgba(250, 250, 255, 1),
+    70px 3px 0 -5px rgba(245, 245, 250, 1), -25px 5px 0 0 rgba(250, 252, 255, 1);
+  animation: cloud-move linear infinite;
+}
+
+@keyframes cloud-move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(100vw + 400px));
+  }
 }
 
 // 蜂巢结构
