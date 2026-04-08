@@ -241,14 +241,14 @@ onMounted(() => {
   gap: 0.25rem;
   background: var(--card-bg-solid);
   border: 1px solid var(--border-light);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 3px;
 }
 
 .tab-btn {
   padding: 0.3rem 0.75rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   color: var(--text-muted);
   font-size: 0.8rem;

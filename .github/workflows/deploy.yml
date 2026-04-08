@@ -46,6 +46,6 @@ jobs:
           docker build . --file Dockerfile --tag ghcr.io/${{ github.repository_owner }}/0mainpage:latest
           docker push ghcr.io/${{ github.repository_owner }}/0mainpage:latest
 
-      - name: Trigger deploy via webhook
-        run: |
-          curl -X POST "${{ secrets.DEPLOY_WEBHOOK_URL }}" -f --max-time 30 || echo "Webhook triggered (may be async)"
+      # - name: Trigger deploy via webhook
+      #   run: |
+      #     curl -X POST "${{ secrets.DEPLOY_WEBHOOK_URL }}" -f --max-time 30 || echo "Webhook triggered (may be async)"
