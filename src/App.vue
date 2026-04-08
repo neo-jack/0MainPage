@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch, computed, nextTick } from "vue";
 import BackgroundLayer from "./components/BackgroundLayer/BackgroundLayer.vue";
 import ProfileCard from "./components/ProfileCard/ProfileCard.vue";
 import NavGrid from "./components/NavGrid/NavGrid.vue";
@@ -17,13 +17,32 @@ const t = computed(() => (localeStore.locale === "zh" ? zh : en));
 const isLoaded = ref(false);
 const activeCategory = ref<NavCategory>(NAV_CATEGORIES[0]!);
 
+const tabsRef = ref<HTMLElement | null>(null);
+const sliderStyle = ref({ left: "3px", width: "0px" });
+
+const updateSlider = async () => {
+  await nextTick();
+  if (!tabsRef.value) return;
+  const activeBtn = tabsRef.value.querySelector<HTMLElement>(".tab-btn.active");
+  if (!activeBtn) return;
+  sliderStyle.value = {
+    left: `${activeBtn.offsetLeft}px`,
+    width: `${activeBtn.offsetWidth}px`,
+  };
+};
+
+watch(activeCategory, updateSlider);
+watch(isLoaded, (val) => {
+  if (val) updateSlider();
+});
+
 // 监听主题色变化
 watch(
   () => themeStore.themeColor,
   (color) => {
     document.documentElement.style.setProperty("--primary-color", color);
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 onMounted(() => {
@@ -85,7 +104,8 @@ onMounted(() => {
           <section class="right-section">
             <!-- 功能区顶部 -->
             <div class="top-bar">
-              <div class="nav-tabs">
+              <div class="nav-tabs" ref="tabsRef">
+                <span class="tab-slider" :style="sliderStyle"></span>
                 <button
                   v-for="cat in NAV_CATEGORIES"
                   :key="cat"
@@ -194,7 +214,7 @@ onMounted(() => {
 .left-section {
   flex: 0 0 auto;
   width: 380px;
-   max-height: 340px;
+  max-height: 340px;
 }
 
 .right-section {
@@ -212,7 +232,7 @@ onMounted(() => {
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
-   margin-top: 0.5rem;
+  margin-top: 0.5rem;
   margin-bottom: 0.4rem;
 }
 
@@ -235,7 +255,6 @@ onMounted(() => {
   animation: gradientShift 3s ease-in-out infinite;
   letter-spacing: 2px;
 }
-
 .nav-tabs {
   display: flex;
   gap: 0.25rem;
@@ -243,6 +262,19 @@ onMounted(() => {
   border: 1px solid var(--border-light);
   border-radius: 12px;
   padding: 3px;
+  position: relative;
+}
+
+.tab-slider {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  border-radius: 8px;
+  background: var(--primary-color, #4a9eff);
+  transition:
+    left 0.25s ease,
+    width 0.25s ease;
+  pointer-events: none;
 }
 
 .tab-btn {
@@ -253,19 +285,19 @@ onMounted(() => {
   color: var(--text-muted);
   font-size: 0.8rem;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: color 0.25s;
   white-space: nowrap;
+  position: relative;
+  z-index: 1;
 
   &:hover {
     color: var(--text-light);
   }
 
   &.active {
-    background: var(--primary-color, #4a9eff);
     color: #fff;
   }
 }
-
 @keyframes gradientShift {
   0%,
   100% {
