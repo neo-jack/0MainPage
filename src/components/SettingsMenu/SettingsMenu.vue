@@ -14,28 +14,23 @@
     </button>
 
     <div v-if="open" class="menu glass-card" @click.stop>
-      <a
-        class="menu-item link"
-        href="https://java2ai.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        网站风格参考链接
-      </a>
-      <a
-        class="menu-item link"
-        href="https://colorhunt.co/palette/9fb3df9ec6f3bddde4fff1d5"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        晴天颜色参考链接
-      </a>
+     <a
+  v-for="item in menuItems"
+  :key="item.href"
+  class="menu-item link"
+  :href="item.href"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  {{ item.label }}
+</a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { menuItems } from "../../config/menu";
 
 const open = ref(false);
 const rootRef = ref<HTMLElement | null>(null);

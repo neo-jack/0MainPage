@@ -88,9 +88,6 @@ const getIcon = (name: string): Component | undefined => {
   border: 3px solid var(--border-light);
   transition: transform 0.3s;
 
-  &:hover {
-    transform: scale(1.05);
-  }
 }
 
 .name {

@@ -164,11 +164,11 @@ onMounted(() => {
   transition: all 0.3s;
 
   &:hover {
-    filter: brightness(1.01);
+    filter: brightness(1.02);
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
   }
 }
 
