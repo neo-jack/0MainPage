@@ -41,7 +41,7 @@ export const navItems: NavItem[] = [
     nameEn: "React18 Core",
     icons: [
       {
-        icon: "Github",
+        icon: "/icon/github.svg",
         url: "https://github.com/neo-jack/102my-react",
         title: "GitHub",
       },
@@ -74,10 +74,14 @@ export const navItems: NavItem[] = [
     name: "three3D网站",
     nameEn: "Three3D Website",
     icons: [
-      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+      {
+        icon: "/icon/github.svg",
+        url: "https://github.com/neo-jack",
+        title: "GitHub",
+      },
     ],
     localUrl: "http://localhost:3002",
-    
+
     prodUrl: "https://h02.example.com",
     color: "#ff9500",
     description: "前端项目二",
@@ -93,7 +97,11 @@ export const navItems: NavItem[] = [
     name: "其他-占位",
     nameEn: "Others",
     icons: [
-      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+      {
+        icon: "/icon/github.svg",
+        url: "https://github.com/neo-jack",
+        title: "GitHub",
+      },
     ],
     localUrl: "http://localhost:3004",
     prodUrl: "https://h04.example.com",
@@ -111,7 +119,11 @@ export const navItems: NavItem[] = [
     name: "工具-占位",
     nameEn: "Tools",
     icons: [
-      { icon: "Github", url: "https://github.com/neo-jack", title: "GitHub" },
+      {
+        icon: "/icon/github.svg",
+        url: "https://github.com/neo-jack",
+        title: "GitHub",
+      },
     ],
     localUrl: "http://localhost:4001",
     prodUrl: "https://s01.example.com",

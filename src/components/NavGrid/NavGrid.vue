@@ -204,7 +204,7 @@ onMounted(() => {
 .icon-group {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
+  gap: 6px;
 }
 
 .nav-icon-link {
@@ -218,9 +218,37 @@ onMounted(() => {
   transition: all 0.3s ease;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 
- &:hover {
-    filter: brightness(1.3);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background:
+      //左上角
+      linear-gradient(currentColor, currentColor) 0 0 / 5px 1.5px no-repeat,
+      linear-gradient(currentColor, currentColor) 0 0 / 1.5px 5px no-repeat,
+      //右上角
+      linear-gradient(currentColor, currentColor) 100% 0 / 5px 1.5px no-repeat,
+      linear-gradient(currentColor, currentColor) 100% 0 / 1.5px 5px no-repeat,
+      //左下角
+      linear-gradient(currentColor, currentColor) 0 100% / 5px 1.5px no-repeat,
+      linear-gradient(currentColor, currentColor) 0 100% / 1.5px 5px no-repeat,
+      //右下角
+      linear-gradient(currentColor, currentColor) 100% 100% / 5px 1.5px no-repeat,
+      linear-gradient(currentColor, currentColor) 100% 100% / 1.5px 5px no-repeat;
+    opacity: 0;
+    //淡出
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    filter: brightness(1);
+
+    &::before {
+      opacity: 1;
+    }
   }
 }
 
