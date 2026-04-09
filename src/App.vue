@@ -35,6 +35,12 @@ watch(activeCategory, updateSlider);
 watch(isLoaded, (val) => {
   if (val) updateSlider();
 });
+//渲染启动 卸载清除
+const ro = new ResizeObserver(() => updateSlider());
+watch(tabsRef, (el, _, onCleanup) => {
+  if (el) ro.observe(el);
+  onCleanup(() => ro.disconnect());
+});
 
 // 监听主题色变化
 watch(
