@@ -26,7 +26,7 @@
             target="_blank"
             class="nav-icon-link"
             :title="navIcon.title"
-            @click.stop
+            @click.prevent.stop="handleIconClick(navIcon)"
           >
             <img
               v-if="isImageIcon(navIcon.icon)"
@@ -55,18 +55,25 @@
       </div>
     </div>
   </div>
+  <NetCheck ref="netCheckRef" />
 </template>
 
 <script setup lang="ts">
 import * as IconPark from "@icon-park/vue-next";
-import { navItems, getNavUrl, type NavItem, type NavCategory } from "../../config/nav";
+import { navItems, getNavUrl, type NavItem, type NavIcon, type NavCategory } from "../../config/nav";
 import { useLocaleStore } from "../../store/locale";
 import { ref, computed, onMounted, type Component } from "vue";
+import NetCheck from "../NetCheck/NetCheck.vue";
 
 const props = defineProps<{ category: NavCategory }>();
 
 const localeStore = useLocaleStore();
 const siteStatus = ref<Record<string, boolean>>({});
+const netCheckRef = ref<InstanceType<typeof NetCheck> | null>(null);
+
+const handleIconClick = (navIcon: NavIcon) => {
+  netCheckRef.value?.checkAndOpen(navIcon);
+};
 
 // 按分类过滤导航项
 const filteredItems = computed(() =>
