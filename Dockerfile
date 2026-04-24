@@ -11,6 +11,8 @@ COPY pnpm-lock.yaml ./
 RUN npm install -g pnpm
 RUN pnpm install
 
+# 复制环境变量（Vite 构建时需要 VITE_* 变量）
+COPY .env ./
 
 # 复制源代码（排除 node_modules）
 COPY src ./src

@@ -5,7 +5,8 @@ yarn-error.log*
 .git
 .gitignore
 README.md
-.env
+# .env 需要参与构建（Vite 读取 VITE_* 变量）
+# .env
 .nyc_output
 coverage
 .vscode
