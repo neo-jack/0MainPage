@@ -60,8 +60,18 @@ jobs:
           timeout: 30s
           command_timeout: 10m
           script: |
+            # 停掉并删除同名容器（正常部署路径）
             docker stop ${{ env.CONTAINER_NAME }} || true
             docker rm ${{ env.CONTAINER_NAME }} || true
+
+            # 清掉占用 80 端口的其他容器（防止旧部署残留导致端口冲突）
+            OCCUPIED=$(docker ps -q --filter "publish=80")
+            if [ -n "$OCCUPIED" ]; then
+              echo "Found containers occupying port 80: $OCCUPIED"
+              docker stop $OCCUPIED || true
+              docker rm $OCCUPIED || true
+            fi
+
             echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/${{ github.repository_owner }}/my-page:latest
             docker run -d --restart=always --name ${{ env.CONTAINER_NAME }} \

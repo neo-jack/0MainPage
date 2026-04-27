@@ -54,8 +54,10 @@ export const navItems: NavItem[] = [
         requireOuterNet: true,
       },
     ],
-    localUrl: "http://localhost:3001",
-    prodUrl: "http://113.45.4.229:3001",
+    localUrl:
+      "https://codesandbox.io/p/github/neo-jack/102my-react/draft/magical-knuth",
+    prodUrl:
+      "https://codesandbox.io/p/github/neo-jack/102my-react/draft/magical-knuth",
     color: "#4a9eff",
     description:
       "从零实现React18核心源码，包含Fiber架构、Hooks、Reconciler、并发模式等",
