@@ -11,11 +11,5 @@ export const menuItems: MenuItem[] = [
     labelEn: "GitHub",
     href: "http://baidu.com/",
     requireOuterNet: true,
-  },
-  {
-    label: "figma链接",
-    labelEn: "Figma",
-    href: "http://baidu.com/",
-    requireOuterNet: true,
-  },
+  }
 ];

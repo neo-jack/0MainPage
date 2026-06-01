@@ -4,9 +4,9 @@
 const isDev = import.meta.env.DEV;
 
 // 导航分类
-export type NavCategory = "网站" | "工具" | "源码" | "其他";
+export type NavCategory =  "AI工具箱" | "源码" | "工具" | "其他";
 
-export const NAV_CATEGORIES: NavCategory[] = ["网站", "源码", "工具", "其他"];
+export const NAV_CATEGORIES: NavCategory[] = ["AI工具箱", "源码", "工具", "其他"];
 
 // 导航图标配置
 export interface NavIcon {
@@ -75,75 +75,28 @@ export const navItems: NavItem[] = [
     category: "源码",
   },
   {
-    id: 2,
-    name: "three3D网站",
-    nameEn: "Three3D Website",
-    icons: [
-      {
-        icon: "/icon/github.svg",
-        url: "https://github.com/neo-jack",
-        title: "GitHub",
-        requireOuterNet: true,
-      },
-    ],
-    localUrl: "http://localhost:3002",
-
-    prodUrl: "https://h02.example.com",
-    color: "#ff9500",
-    description: "前端项目二",
-    descriptionEn: "Frontend Project 2",
-    techStack: ["React", "TypeScript"],
-    techStackEn: ["React", "TypeScript-en"],
-    highlights: ["高性能"],
-    highlightsEn: ["High Performance"],
-    category: "网站",
-  },
-  {
-    id: 4,
-    name: "其他-占位",
-    nameEn: "Others",
-    icons: [
-      {
-        icon: "/icon/github.svg",
-        url: "https://github.com/neo-jack",
-        title: "GitHub",
-        requireOuterNet: true,
-      },
-    ],
-    localUrl: "http://localhost:3004",
-    prodUrl: "https://h04.example.com",
-    color: "#5ac8fa",
-    description: "前端项目四",
-    descriptionEn: "Frontend Project 4",
-    techStack: ["Next.js", "TailwindCSS"],
-    techStackEn: ["Next.js", "TailwindCSS"],
-    highlights: ["SSR"],
-    highlightsEn: ["SSR"],
-    category: "其他",
-  },
-  {
-    id: 5,
-    name: "工具-占位",
-    nameEn: "Tools",
-    icons: [
-      {
-        icon: "/icon/github.svg",
-        url: "https://github.com/neo-jack",
-        title: "GitHub",
-        requireOuterNet: true,
-      },
-    ],
-    localUrl: "http://localhost:4001",
-    prodUrl: "https://s01.example.com",
-    color: "#af52de",
-    description: "后端服务",
-    descriptionEn: "Backend Service",
-    techStack: ["Node.js", "Express"],
-    techStackEn: ["Node.js", "Express"],
-    highlights: ["RESTful API"],
-    highlightsEn: ["RESTful API"],
-    category: "工具",
-  },
+  id: 5,
+  name: "AI 中转站",
+  nameEn: "AI Gateway",
+  icons: [
+    {
+      icon: "/icon/github.svg",
+      url: "https://github.com/neo-jack",
+      title: "GitHub",
+      requireOuterNet: true,
+    },
+  ],
+  localUrl: "http://localhost:4001",
+  prodUrl: "https://s01.example.com",
+  color: "#af52de",
+  description: "统一管理 AI 接口转发、鉴权与服务调用的后端服务",
+  descriptionEn: "Backend service for unified AI API routing, authentication, and service access",
+  techStack: ["Node.js", "Express"],
+  techStackEn: ["Node.js", "Express"],
+  highlights: ["AI 接口中转", "统一鉴权", "RESTful API"],
+  highlightsEn: ["AI API Gateway", "Unified Authentication", "RESTful API"],
+  category: "AI工具箱",
+}
 ];
 
 // 获取导航链接
