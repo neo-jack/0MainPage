@@ -54,6 +54,7 @@ export default {
   },
   // 导航分类
   navCategory: {
+    AI工具箱: "AI Tools",
     网站: "Website",
     工具: "Tools",
     源码: "Source",
