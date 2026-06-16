@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 todo.md
+
+AGENTS.md
+!/AGENTS.md
